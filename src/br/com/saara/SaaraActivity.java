@@ -15,6 +15,7 @@ public class SaaraActivity extends Activity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
 			
+			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				startActivity(new Intent().setClass(SaaraActivity.this, CategoriasActivity.class));
