@@ -34,18 +34,22 @@ public class LojaAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }    
         
+	@Override
 	public int getCount() {
         return listLojas.size();
     }
    
+	@Override
 	public Object getItem(int position) {
         return listLojas.get(position);
     }
  
+	@Override
 	public long getItemId(int position) {
         return position;
     }
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup viewGroup) {
          
         Lojas estadoVO = listLojas.get(position);
