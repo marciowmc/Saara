@@ -36,6 +36,9 @@ public class MapaActivity extends MapActivity {
 		
 		Lojas loja = (Lojas) params.getSerializable("loja");
 		
+		latitude  = loja.getLatitude();
+		longitude = loja.getLongitude();
+		
 		TextView txtLoja = (TextView) findViewById(R.id.txtLoja);
 		TextView txtEnd  = (TextView) findViewById(R.id.txtEndereco);
 		
