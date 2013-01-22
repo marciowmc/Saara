@@ -6,6 +6,7 @@ import beans.Categorias;
 import br.com.saara.R;
   
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
  
 public class CategoriaAdapter extends BaseAdapter{
+	
+	private static int TRANSPARENT_50 = 125;
+	private static int TRANSPARENT_80 = 215;
+	
     private List<Categorias> listCategorias;
     Context context;
  
@@ -50,36 +55,46 @@ public class CategoriaAdapter extends BaseAdapter{
          
         Categorias estadoVO = listCategorias.get(position);
  
-        //O ViewHolder ir‡ guardar a inst‰ncias dos objetos do estado_row
+        //O ViewHolder irâ€¡ guardar a instâ€°ncias dos objetos do estado_row
         ViewHolder holder;
    
-        //Quando o objeto convertView n‹o for nulo n—s n‹o precisaremos inflar
-        //os objetos do XML, ele ser‡ nulo quando for a primeira vez que for carregado
+        //Quando o objeto convertView nâ€¹o for nulo nâ€”s nâ€¹o precisaremos inflar
+        //os objetos do XML, ele serâ€¡ nulo quando for a primeira vez que for carregado
         if (convertView == null) {
             convertView = inflater.inflate(idLayout, null);
     
-            //Cria o Viewholder e guarda a inst‰ncia dos objetos
+            //Cria o Viewholder e guarda a instâ€°ncia dos objetos
             holder = new ViewHolder();
+            holder.qtdLojas = (TextView) convertView.findViewById(R.id.txtQtdLojas);
             holder.icone = (ImageView)convertView.findViewById(R.id.imgIcon);
             holder.title = (TextView) convertView.findViewById(R.id.txtTitle);
            
             convertView.setTag(holder);
         } else {
-            //pega o ViewHolder para ter um acesso r‡pido aos objetos do XML
-            //ele sempre passar‡ por aqui quando,por exemplo, for efetuado uma rolagem na tela 
+            //pega o ViewHolder para ter um acesso râ€¡pido aos objetos do XML
+            //ele sempre passarâ€¡ por aqui quando,por exemplo, for efetuado uma rolagem na tela 
             holder = (ViewHolder) convertView.getTag();
         }
  
         holder.title.setText(estadoVO.getText());
+        holder.qtdLojas.setText(""+estadoVO.getQtdLojas());
         holder.icone.setImageResource(estadoVO.getIcon());
+        
+        int rgb[] = estadoVO.getRgbColor();
+        
+		holder.title.setBackgroundColor(Color.argb(215,rgb[0], rgb[1],rgb[2] ));
+		holder.icone.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
+		holder.qtdLojas.setBackgroundColor(Color.argb(125,rgb[0], rgb[1],rgb[2]));
+		
        
         return convertView;
  
     }
   
-    //Criada esta classe est‡tica para guardar a referncia dos objetos abaixo
+    //Criada esta classe estâ€¡tica para guardar a referÂ�ncia dos objetos abaixo
     static class ViewHolder {
         public ImageView icone;
         public TextView title;
+        public TextView qtdLojas;
     }
 }

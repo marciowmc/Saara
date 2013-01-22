@@ -5,7 +5,25 @@ public class Categorias {
 	private int icon;
 	private String text;
 	private int idCategoria;
+	private int qtdLojas;
+	private int[] rgbColor; 
 	
+  
+	public int[] getRgbColor() {
+		return rgbColor;
+	}
+
+	public void setRgbColor(int[] rgbColor) {
+		this.rgbColor = rgbColor;
+	}
+
+	public int getQtdLojas() {
+		return qtdLojas;
+	}
+
+	public void setQtdLojas(int qtdLojas) {
+		this.qtdLojas = qtdLojas;
+	}
 
 	public int getIdCategoria() {
 		return idCategoria;
@@ -31,11 +49,13 @@ public class Categorias {
 		this.text = text;
 	}
 	
-	public Categorias(int icon, String text, int idCategoria) {
+	public Categorias(int icon, String text, int idCategoria , int qtd , int[] hexColor) {
 		super();
 		this.icon = icon;
 		this.text = text;
 		this.idCategoria = idCategoria;
+		this.qtdLojas = qtd;
+		this.rgbColor = hexColor;
 	}
 	
 	

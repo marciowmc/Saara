@@ -8,6 +8,56 @@
     <string name="bt_login">LOGIN</string>
     <string name="bt_facebook">FACEBOOK</string>
     <string name="categoria_titulo">CATEGORIAS</string>
+    
+    <string name="armarinhos">Armarinhos</string>
+    <string name="esportivos">Artigos esportivos</string>
+    <string name="festas">Artigos de Festa</string>
+    <string name="artesanato">Artesanato</string>
+    <string name="bancos">Bancos</string>
+    <string name="bazares">Bazares</string>
+    <string name="bijuterias">Bijuterias</string>
+    <string name="brinquedos">Brinquedos</string>
+	<string name="calcados">Calçados, Bolsas e Malas</string>
+	<string name="cama">Cama, Mesa e Banho</string>
+	<string name="carnaval">Carnaval</string>
+	<string name="confeccao">Confecção</string>
+	<string name="decoracao">Decoração</string>
+	<string name="embalagens">Descartáveis e Embalagens</string>
+	<string name="drogaria">Drogaria / Farmácia</string>
+	<string name="emporio">Empório</string>
+	<string name="estacionamento">Estacionamento</string>
+	<string name="ferragens">Ferragens / Ferramentas</string>
+	<string name="flor">Flor</string>
+	<string name="joias">Jóias / Relógios</string>
+	<string name="bares">Bares, Lanchonetes e Restaurantes</string>
+	<string name="lingerie">Lingerie / Erótica</string>
+	<string name="malhas">Malhas e Praia</string>
+	<string name="moda">Moda Indiana</string>
+	<string name="palhas">Palhas</string>
+	<string name="papelaria">Papelaria</string>
+	<string name="perfumes">Perfumes / Cosméticos</string>
+	<string name="plasticos">Plásticos / Borrachas</string>
+	<string name="presentes">Presentes</string>
+	<string name="feminina">Roupa Feminina</string>
+	<string name="infantil">Roupa Infantil</string>
+	<string name="silk">Silk / Transfer</string>
+	<string name="tecidos">Tecidos</string>
+	<string name="vestuario">Vestuário / Geral</string>
+	<string name="outros">Outros</string>
+	
+	
+ 
+
+
+
+
+
+
+
+
+
+
+
         
 
 </resources>

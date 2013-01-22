@@ -3,7 +3,7 @@
     xmlns:android1="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000000" > 
+    android:background="@drawable/bg_interno" >
 
     <ImageView
         android1:id="@+id/imageView1"
@@ -11,7 +11,6 @@
         android1:layout_height="wrap_content"
         android1:layout_centerHorizontal="true"
         android1:layout_centerVertical="true"
-        android:contentDescription="@string/app_name" 
-        android1:src="@drawable/logo" />
+        android1:src="@drawable/logo_menu" />
 
 </RelativeLayout>
