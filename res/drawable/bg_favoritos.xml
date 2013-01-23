@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:background="#4ECDC4"
+    <item android:background="#4ECDC4" android:drawable="@drawable/menu_favoritos"
           android:state_pressed="true" />
     
-    <item android:background="#4ECDC4"
+    <item android:background="#4ECDC4" android:drawable="@drawable/menu_favoritos"
           android:state_focused="true" />
     
-    <item android:background="#DFD1B0"/>
+    <item android:background="#DFD1B0" android:drawable="@drawable/menu_favoritos"/>
 </selector>

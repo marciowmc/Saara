@@ -3,8 +3,8 @@
     <item android:background="#52DD5C" android:drawable="@drawable/bg_info"
           android:state_pressed="true" />
     
-    <item android:background="#52DD5C"
+    <item android:background="#52DD5C" android:drawable="@drawable/bg_info"
           android:state_focused="true" />
     
-    <item android:background="#D8CAA8"/>
+    <item android:background="#D8CAA8" android:drawable="@drawable/bg_info"/>
 </selector>

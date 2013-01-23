@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:background="#FFC600"
+    <item android:background="#FFC600" android:drawable="@drawable/menu_segmentos"
           android:state_pressed="true" />
     
-    <item android:background="#FFC600"
+    <item android:background="#FFC600" android:drawable="@drawable/menu_segmentos"
           android:state_focused="true" />
     
-    <item android:background="#E7DDBC"/>
+    <item android:background="#E7DDBC" android:drawable="@drawable/menu_segmentos"/>
 </selector>

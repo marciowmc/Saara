@@ -20,7 +20,7 @@
              android:layout_alignParentTop="true"
              android:layout_marginLeft="0dp"
              android:contentDescription="@string/app_name"
-             android:src="@drawable/logo_saara" />
+             android:background="@drawable/logo_saara" />
 
          <LinearLayout
              android:id="@+id/l1"
@@ -37,8 +37,7 @@
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-                  android:background="@drawable/bg_info"
-                  android:src="@drawable/menu_informacoes" />
+                  android:background="@drawable/bg_info"  />
              
          </LinearLayout>
 
@@ -58,8 +57,7 @@
                  android:layout_height="wrap_content"
                  android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp"
-                 android:background="@drawable/bg_favoritos"
-                 android:src="@drawable/menu_favoritos" />
+                 android:background="@drawable/bg_favoritos"  />
 
          </LinearLayout>
 
@@ -81,8 +79,7 @@
                  android:layout_height="wrap_content"
                  android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp"
-                 android:background="@drawable/bg_segmentos"
-                 android:src="@drawable/menu_segmentos" />
+                 android:background="@drawable/bg_segmentos"  />
 
          </LinearLayout>
         
