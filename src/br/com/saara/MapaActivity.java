@@ -39,11 +39,11 @@ public class MapaActivity extends MapActivity {
 		latitude  = loja.getLatitude();
 		longitude = loja.getLongitude();
 		
-		TextView txtLoja = (TextView) findViewById(R.id.txtLoja);
-		TextView txtEnd  = (TextView) findViewById(R.id.txtEndereco);
+		//TextView txtLoja = (TextView) findViewById(R.id.txtLoja);
+		//TextView txtEnd  = (TextView) findViewById(R.id.txtEndereco);
 		
-		txtLoja.setText(loja.getNome());
-		txtEnd.setText(loja.getEndereco());
+		//txtLoja.setText(loja.getNome());
+		//txtEnd.setText(loja.getEndereco());
 		
 		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_pin_cliente);
 		

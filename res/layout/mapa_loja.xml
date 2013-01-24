@@ -1,48 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000000"
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/txtLoja"
+    <RelativeLayout
+        android:id="@+id/topo"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFFFFF" />
+        android:layout_height="47dp"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:background="#ECE5CE" >
 
-    <TextView
-        android:id="@+id/txtEndereco"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF" />
+         <ImageView
+             android:id="@+id/imageView1"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginLeft="0dp"
+             android:contentDescription="@string/app_name"
+             android:background="@drawable/logo_saara" />
+
+         <LinearLayout
+             android:id="@+id/l1"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:background="#D8CAA8"
+             android:gravity="center" >
+             
+              <Button
+                  android:id="@+id/btInformacoes"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+                  android:background="@drawable/menu_informacoes" />
+             
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/l2"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_centerVertical="true"
+             android:layout_toLeftOf="@+id/l1"
+             android:background="#DFD1B0"
+             android:gravity="center_vertical"
+             android:orientation="vertical" >
+
+             <Button
+                 android:id="@+id/btFavoritos"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp"
+                 android:background="@drawable/menu_favoritos" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/l3"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_centerVertical="true"
+             android:layout_toLeftOf="@+id/l2"
+             android:background="#FFC600"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:paddingLeft="5dp"
+             android:paddingRight="5dp" >
+
+             <Button
+                 android:id="@+id/btSegmentos"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp"
+                 android:background="@drawable/menu_segmentos" />
+
+         </LinearLayout>
+        
+    </RelativeLayout>
     
-    <com.google.android.maps.MapView
-        android:id="@+id/map"
+    <RelativeLayout
+        android:id="@+id/rodape"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#D8ECE5CE"
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/txtEnd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="RUA REGENTE FEIJÓ, 91 - CENTRO - RIO DE JANEIRO"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#96712D" />
+        
+        <Button
+            android:id="@+id/btFavoritoRodape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtEnd"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#DFD0AF"
+            android:drawableRight="@drawable/menu_favoritos"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:drawablePadding="15dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="ENVIAR PARA OS FAVORITOS" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout android:id="@+id/meio"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/linear"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:apiKey="0WSBmB-CG7WhcldqU4W7fYZDwqhHkw_46P6MzwA"
-        android:clickable="true"
-        android:drawingCacheQuality="auto" />
+        android:layout_below="@+id/topo"
+        android:layout_above="@+id/rodape">
 
-</LinearLayout>
+        <com.google.android.maps.MapView
+	        android:id="@+id/map"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:apiKey="0WSBmB-CG7WhcldqU4W7fYZDwqhHkw_46P6MzwA"
+	        android:clickable="true"
+	        android:drawingCacheQuality="auto" />
+       
+        <RelativeLayout android:id="@+id/classifica"
+            android:layout_width="fill_parent"
+            android:background="#4ECDC4"
+            android:layout_height="wrap_content">
+             
+            <LinearLayout
+                android:id="@+id/topoinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1" >
+
+			    <ImageView
+			        android:id="@+id/imgCategoria"
+			        android:layout_width="0dp"
+			        android:layout_height="fill_parent"
+			        android:layout_weight=".2"
+			        android:background="#4ECDC4"
+			        android:padding="10dp"
+			        android:src="@drawable/bazares" />
+			
+			    <TextView
+			        android:id="@+id/txtTitle"
+			        android:layout_width="0dp"
+			        android:layout_height="fill_parent"
+			        android:layout_weight=".6"
+			        android:background="#D84ECDC4"
+			        android:gravity="center"
+			        android:textAppearance="?android:attr/textAppearanceLarge"
+			        android:textColor="#FFFFFF" />
+			
+			     <ImageView
+			        android:id="@+id/imgFavorito"
+			        android:layout_width="0dp"
+			        android:layout_height="fill_parent"
+			        android:layout_weight=".2"
+			        android:background="#4ECDC4"
+			        android:padding="10dp"
+			        android:src="@drawable/menu_favoritos" />
+			    
+			</LinearLayout>	
+            
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
