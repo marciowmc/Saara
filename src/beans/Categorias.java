@@ -1,14 +1,27 @@
 package beans;
 
-public class Categorias {
+import java.io.Serializable;
+
+
+@SuppressWarnings("serial")
+public class Categorias implements Serializable {
 	
 	private int icon;
 	private String text;
 	private int idCategoria;
 	private int qtdLojas;
-	private int[] rgbColor; 
+	private int[] rgbColor;
+	private int[] rgbColorListaLojas;
 	
   
+	public int[] getRgbColorListaLojas() {
+		return rgbColorListaLojas;
+	}
+
+	public void setRgbColorListaLojas(int[] rgbColorListaLojas) {
+		this.rgbColorListaLojas = rgbColorListaLojas;
+	}
+	
 	public int[] getRgbColor() {
 		return rgbColor;
 	}
@@ -49,13 +62,14 @@ public class Categorias {
 		this.text = text;
 	}
 	
-	public Categorias(int icon, String text, int idCategoria , int qtd , int[] hexColor) {
+	public Categorias(int icon, String text, int idCategoria , int qtd , int[] hexColor , int[] rgbColorLojas) {
 		super();
 		this.icon = icon;
 		this.text = text;
 		this.idCategoria = idCategoria;
 		this.qtdLojas = qtd;
 		this.rgbColor = hexColor;
+		this.rgbColorListaLojas = rgbColorLojas;
 	}
 	
 	
