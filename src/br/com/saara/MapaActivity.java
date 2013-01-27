@@ -62,6 +62,7 @@ public class MapaActivity extends MapActivity {
 		Button btSegmentos    = (Button) findViewById(R.id.btSegmentos);
 		Button btInfo         = (Button) findViewById(R.id.btInformacoes);
 		
+		
 		btFavoritoTopo.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -138,6 +139,14 @@ public class MapaActivity extends MapActivity {
 				finish();
 			}
 		});
+
+		String lojasFavoritas = Utilidade.getFavorite(MapaActivity.this);
+		if(lojasFavoritas != null){
+			if(lojasFavoritas.contains(""+loja.getIdLoja())){
+				btFavoritoTopo.setBackgroundResource(R.drawable.favoritos_hover);
+				btFavoritos.setEnabled(false);
+			}
+		}
 		
 		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_pin_cliente);
 		

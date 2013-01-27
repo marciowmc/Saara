@@ -45,6 +45,11 @@ public class FavoritosActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.favoritos);
+
+		progress = new ProgressDialog(FavoritosActivity.this);
+		progress.setMessage("Carregando favoritos...");
+		progress.setTitle("Meu Saara");
+		progress.show();
 		
 		myHandler = new Handler();
 		
@@ -100,7 +105,7 @@ public class FavoritosActivity extends Activity {
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 			    Button close = (Button) dialog.findViewById(R.id.btClose);
 			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
-			    WMLP.y = 120;   //y position
+			    WMLP.y = 100;  
 			    dialog.getWindow().setAttributes(WMLP);
 			    dialog.show();
 			}
@@ -120,7 +125,7 @@ public class FavoritosActivity extends Activity {
 			AlertDialog.Builder alert = new AlertDialog.Builder(FavoritosActivity.this);
 			alert.setMessage("Você ainda não escolheu nenhuma loja como favorita.");
 			alert.setTitle("Meu Saara");
-			alert.setIcon(R.drawable.ic_launcher);
+			alert.setIcon(R.drawable.icon);
 			alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -162,6 +167,7 @@ public class FavoritosActivity extends Activity {
 								fav.setRgbColor(new ColorRGB().getColorList(fav.getId_categoria()));
 								fav.setDrawable_categoria(new ColorRGB().getDrawableCategoria(fav.getId_categoria()));
 								listFavoritos.add(fav);
+								
 							}
 							
 							runOnUiThread(new Runnable() {
@@ -188,11 +194,5 @@ public class FavoritosActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		progress = new ProgressDialog(FavoritosActivity.this);
-		progress.setMessage("Carregando favoritos...");
-		progress.setTitle("Meu Saara");
-		progress.setIcon(R.drawable.ic_launcher);
-		progress.show();
-
 	}
 }
