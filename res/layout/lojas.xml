@@ -1,38 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:background="#000000"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/txtHeader"
+     <RelativeLayout
+        android:id="@+id/topo"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#336699"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="Lojas"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-    
-    <ListView
-        android:id="@+id/listLojas"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="#00000000"
-        android:clickable="true" >
+        android:layout_height="47dp"
+        android:layout_gravity="center" 
+        android:background="#ECE5CE" >
 
-    </ListView>
+         <ImageView
+             android:id="@+id/imageView1"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginLeft="0dp"
+             android:background="@drawable/logo_saara_topo"
+             android:contentDescription="@string/app_name" />
+
+         <LinearLayout
+             android:id="@+id/l2"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_centerVertical="true"
+             android:layout_toLeftOf="@+id/l1"
+             android:background="#DFD1B0"
+             android:gravity="center_vertical"
+             android:orientation="vertical" >
+
+             <Button
+                 android:id="@+id/btFavoritos"
+                 android:layout_width="wrap_content"
+                 android:layout_height="47dp"
+                 android:layout_gravity="center"
+                 android:background="@drawable/bg_favoritos" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/l3"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_centerVertical="true"
+             android:layout_toLeftOf="@+id/l2"
+             android:gravity="center"
+             android:orientation="vertical">
+
+             <Button
+                 android:id="@+id/btSegmentos"
+                 android:layout_width="wrap_content"
+                 android:layout_height="47dp"
+                 android:background="@drawable/bg_segmentos" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/l1"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentTop="true"
+             android:background="#D8CAA8"
+             android:gravity="center" >
+
+             <Button
+                 android:id="@+id/btInformacoes"
+                 android:layout_width="wrap_content"
+                 android:layout_height="47dp"
+                 android:background="@drawable/bg_info" />
+         </LinearLayout>
+        
+    </RelativeLayout>
+   
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_interno"
+        android:orientation="vertical" >
+         
+        <LinearLayout
+            android:id="@+id/subtopo"
+            android:layout_width="fill_parent"
+            android:layout_height="47dp"
+            android:layout_below="@+id/topo1"
+            android:background="#DFD0AF"
+            android:weightSum="1" >
+
+            <LinearLayout
+                android:id="@+id/li"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".2"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/btVoltar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/seta_voltar"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" />
+
+			</LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/li2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".8"
+                android:background="#FFFFFF" >
+
+                <TextView
+                    android:id="@+id/txtCategoria"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="ALIMENTACAO"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#AD9161" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        
+        <ListView android:id="@+id/listLoja"
+            android:layout_width="fill_parent"
+            android:divider="#80000000"
+            android:dividerHeight="0dp"
+            android:layout_height="fill_parent">
+            
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

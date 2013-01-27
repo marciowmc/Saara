@@ -2,11 +2,13 @@ package adapters;
 
 import java.util.List;
 
+import beans.Favoritos;
 import beans.Lojas;
 import br.com.saara.R;
   
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +16,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
  
-public class LojaAdapter extends BaseAdapter{
+public class FavoritoAdapter extends BaseAdapter{
 	
 	private static int TRANSPARENT_50 = 125;
 	private static int TRANSPARENT_80 = 215;
-    private List<Lojas> listLojas;
+    private List<Favoritos> listLojas;
     private int imgCategoria;
     Context context;
     private int[] rgbDark;
@@ -28,17 +30,14 @@ public class LojaAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private int idLayout;
      
-    public LojaAdapter(Context context, List<Lojas> listLojas, int idLayout , int img, int[] rgb , int[] rgbDark) {
+    public FavoritoAdapter(Context context, List<Favoritos> listLojas, int idLayout ) {
         this.listLojas = listLojas;
         this.context = context;
         this.idLayout = idLayout;
-        this.imgCategoria = img;
-        this.rgbLight = rgb;
-        this.rgbDark = rgbDark;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
  
-    public void addItem(final Lojas item) {
+    public void addItem(final Favoritos item) {
         this.listLojas.add(item);
         //Atualizar a lista caso seja adicionado algum item
         notifyDataSetChanged();
@@ -59,7 +58,7 @@ public class LojaAdapter extends BaseAdapter{
         return position;
     }
 	
-	public void setData(List<Lojas> newList) {
+	public void setData(List<Favoritos> newList) {
 		this.listLojas = newList;
 		notifyDataSetChanged();
 	}
@@ -67,7 +66,7 @@ public class LojaAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup viewGroup) {
          
-        Lojas estadoVO = listLojas.get(position);
+        Favoritos estadoVO = listLojas.get(position);
  
         ViewHolder holder;
    
@@ -85,19 +84,15 @@ public class LojaAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
  
-        holder.title.setText(estadoVO.getNome());
-        holder.icone.setImageResource(imgCategoria);
+        holder.title.setText(estadoVO.getNome_loja());
+        holder.icone.setImageResource(estadoVO.getDrawable_categoria());
         
-        if (position % 2 == 0){
-        	holder.title.setBackgroundColor(Color.argb(215,rgbLight[0], rgbLight[1],rgbLight[2] ));
-    		holder.icone.setBackgroundColor(Color.rgb(rgbLight[0], rgbLight[1],rgbLight[2]));
-    		holder.pin.setBackgroundColor(Color.argb(125,rgbLight[0], rgbLight[1],rgbLight[2]));
-        }else{
-        	holder.title.setBackgroundColor(Color.argb(215,rgbDark[0], rgbDark[1],rgbDark[2] ));
-    		holder.icone.setBackgroundColor(Color.rgb(rgbDark[0], rgbDark[1],rgbDark[2]));
-    		holder.pin.setBackgroundColor(Color.argb(125,rgbDark[0], rgbDark[1],rgbDark[2]));
-        }
-       
+        int rgb[] = estadoVO.getRgbColor();
+        
+		holder.title.setBackgroundColor(Color.argb(215,rgb[0], rgb[1],rgb[2] ));
+		holder.icone.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
+		
+        
         return convertView;
  
     }

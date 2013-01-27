@@ -5,10 +5,14 @@ import beans.Categorias;
 
 import adapters.CategoriaAdapter;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -28,25 +32,45 @@ public class CategoriasActivity extends Activity  {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.categorias);
-
-		btInfo      = (Button) findViewById(R.id.btInformacoes);
 		btFavoritos = (Button) findViewById(R.id.btFavoritos);
+		btInfo      = (Button) findViewById(R.id.btInformacoes);
 		
 		btInfo.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(CategoriasActivity.this, "Clicou no botao info", Toast.LENGTH_LONG).show();
+				final Dialog dialog = new Dialog(CategoriasActivity.this,android.R.style.Theme_InputMethod);
+				dialog.setContentView(R.layout.popup_info);
+				Button btClose = (Button) dialog.findViewById(R.id.btClose);
+				
+			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
+
+			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
+			    WMLP.y = 80;   //y position
+			    dialog.getWindow().setAttributes(WMLP);
+			    
+			    btClose.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
+			    
+			    dialog.show();
 			}
 		});
+		
+		
 		
 		btFavoritos.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(CategoriasActivity.this, "Clicou no botao favoritos", Toast.LENGTH_LONG).show();
+				startActivity(new Intent().setClass(CategoriasActivity.this, FavoritosActivity.class));
 			}
 		});
 		

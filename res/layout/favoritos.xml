@@ -37,7 +37,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="47dp"
                  android:layout_gravity="center"
-                 android:background="@drawable/bg_favoritos" />
+                 android:background="@drawable/favoritos_hover" />
 
          </LinearLayout>
 
@@ -55,7 +55,7 @@
                  android:id="@+id/btSegmentos"
                  android:layout_width="wrap_content"
                  android:layout_height="47dp"
-                 android:background="@drawable/segmento_hover" />
+                 android:background="@drawable/segmento" />
 
          </LinearLayout>
 
@@ -86,11 +86,12 @@
         android:background="@drawable/bg_interno" >
 
        <ListView
-           android:id="@+id/listCategoria"
-           android:divider="#80000000"
-           android:dividerHeight="0dp"
+           android:id="@+id/listFavoritos"
            android:layout_width="fill_parent"
-           android:layout_height="fill_parent" >
+           android:layout_height="fill_parent"
+           android:divider="#80000000"
+           android:dividerHeight="0dp" >
+
 </ListView>
 
     </LinearLayout>

@@ -7,35 +7,59 @@ import java.io.Serializable;
 public class Lojas implements Serializable {
 
 	private String nome;
-	private String descricao;
 	private String endereco;
 	private double latitude;
 	private double longitude;
+	private String telefone;
 	private int idLoja;
+	private int id_categoria;
+	private String categoria;
 	
-	
-	public Lojas(String nome, String descricao, String endereco,
-			double latitude, double longitude, int idLoja) {
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public int getId_categoria() {
+		return id_categoria;
+	}
+
+	public void setId_categoria(int id_categoria) {
+		this.id_categoria = id_categoria;
+	}
+
+	public Lojas(String nome, String endereco,
+			double latitude, double longitude, int idLoja ) {
 		super();
 		this.nome = nome;
-		this.descricao = descricao;
-		this.endereco = endereco;
-		this.latitude = latitude;
+		this.endereco  = endereco;
+		this.latitude  = latitude;
 		this.longitude = longitude;
-		this.idLoja = idLoja;
+		this.idLoja    = idLoja;
 	}
+	
+	public Lojas() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getDescricao() {
-		return descricao;
+	
+	public String getTelefone() {
+		return telefone;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
+
 	public String getEndereco() {
 		return endereco;
 	}
