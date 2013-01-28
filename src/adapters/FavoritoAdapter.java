@@ -89,9 +89,9 @@ public class FavoritoAdapter extends BaseAdapter{
         
         int rgb[] = estadoVO.getRgbColor();
         
-		holder.title.setBackgroundColor(Color.argb(215,rgb[0], rgb[1],rgb[2] ));
+		holder.title.setBackgroundColor(Color.argb(TRANSPARENT_80,rgb[0], rgb[1],rgb[2] ));
 		holder.icone.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
-		
+		holder.pin.setBackgroundColor(Color.argb(TRANSPARENT_50, rgb[0], rgb[1],rgb[2] ));
         
         return convertView;
  

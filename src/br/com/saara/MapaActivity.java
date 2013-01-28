@@ -12,7 +12,9 @@ import com.google.android.maps.OverlayItem;
 import beans.Categorias;
 import beans.Lojas;
 import br.com.saara.util.Utilidade;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -33,6 +35,7 @@ public class MapaActivity extends MapActivity {
 	private Lojas loja;
 	private Categorias categoria;
 	private boolean isFavorite = false;
+	private ImageView imgFavoritos;
 	
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -54,7 +57,7 @@ public class MapaActivity extends MapActivity {
 		latitude  = loja.getLatitude();
 		longitude = loja.getLongitude();
 		
-		ImageView imgFavoritos = (ImageView) findViewById(R.id.imgFavorito);
+		imgFavoritos = (ImageView) findViewById(R.id.imgFavorito);
 		
 		TextView txtEnd       = (TextView) findViewById(R.id.txtEnd);
 		TextView txtCategoria = (TextView) findViewById(R.id.txtCategoria);
@@ -164,6 +167,47 @@ public class MapaActivity extends MapActivity {
 				}
 			}
 		}
+		
+		imgFavoritos.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isFavorite){
+					AlertDialog.Builder dialog = new AlertDialog.Builder(MapaActivity.this);
+					dialog.setTitle("Meu Saara");
+					dialog.setMessage("Deseja remover dos favoritos ?");
+					dialog.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+							Toast.makeText(MapaActivity.this, "Loja removida dos favoritos.", Toast.LENGTH_LONG).show();
+							Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
+							imgFavoritos.setImageResource(R.drawable.favoritos_lojas);
+							isFavorite = false;
+							
+						}
+					});
+					
+					dialog.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+						}
+					});
+					
+				}else{
+					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
+					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
+					Toast.makeText(MapaActivity.this, "Loja adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+					isFavorite = true;
+				}
+			}
+		});
 		
 		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_pin_cliente);
 		

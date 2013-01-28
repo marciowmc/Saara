@@ -14,8 +14,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -117,29 +120,53 @@ public class LojasActivity extends Activity {
 		listView = (ListView) findViewById(R.id.listLoja);
 		
 		listLojas = new ArrayList<Lojas>();
+
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+		if (activeNetworkInfo == null) {
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(LojasActivity.this);
+			builder.setMessage("Não foi possível estabelecer conexão, por favor verifique sua conexão com a internet.")
+					.setCancelable(false)
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int id) {
+									finish();
+								}
+							});
+			AlertDialog alert = builder.create();
+			alert.setTitle("Meu Saara");
+			alert.setIcon(R.drawable.icon);
+			alert.show();
+
+		}else{
 		
-		progress = new ProgressDialog(LojasActivity.this);
-		progress.setTitle("Meu Saara");
-		progress.setMessage("Carregando lojas...");
-		progress.show();
-		
-		adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
-		   
-	    listView.setAdapter(adapter);
-	       
-	    listView.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-				   Intent intent = new Intent();
-				   intent.setClass(LojasActivity.this, MapaActivity.class);
-				   intent.putExtra("loja", listLojas.get(position));
-				   intent.putExtra("categoria", categoria);
-				   startActivity(intent);
-				}
-			});
-	       
-	       carregaLojas();
+			progress = new ProgressDialog(LojasActivity.this);
+			progress.setTitle("Meu Saara");
+			progress.setMessage("Carregando lojas...");
+			progress.show();
+			
+			adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
+			   
+		    listView.setAdapter(adapter);
+		       
+		    listView.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+					   Intent intent = new Intent();
+					   intent.setClass(LojasActivity.this, MapaActivity.class);
+					   intent.putExtra("loja", listLojas.get(position));
+					   intent.putExtra("categoria", categoria);
+					   startActivity(intent);
+					}
+				});
+		       
+		       carregaLojas();
+		}
 	}
 	
 	public void carregaLojas(){

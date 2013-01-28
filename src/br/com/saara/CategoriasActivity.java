@@ -5,7 +5,9 @@ import beans.Categorias;
 
 import adapters.CategoriaAdapter;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -136,5 +138,33 @@ public class CategoriasActivity extends Activity  {
 			});
 		
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		AlertDialog.Builder alert = new AlertDialog.Builder(CategoriasActivity.this);
+		alert.setTitle("Meu Saara");
+		alert.setMessage("Deseja realmente sair ?");
+		alert.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				finish();
+			}
+		});
+		
+		alert.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+			}
+		});
+		
+		alert.create().show();
+	}
 }

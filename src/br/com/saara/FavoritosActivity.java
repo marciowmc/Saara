@@ -18,8 +18,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -46,11 +49,10 @@ public class FavoritosActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.favoritos);
 
-		progress = new ProgressDialog(FavoritosActivity.this);
-		progress.setMessage("Carregando favoritos...");
-		progress.setTitle("Meu Saara");
-		progress.show();
 		
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
 		myHandler = new Handler();
 		
 		listFavoritos = new ArrayList<Favoritos>();
@@ -77,18 +79,17 @@ public class FavoritosActivity extends Activity {
 				   loja.setNome(fav.getNome_loja());
 				   
 				   ColorRGB rgb = new ColorRGB();
-				   
+				   int[] rgbListaLojas = fav.getRgbColor();
 				   Categorias cat = new Categorias(rgb.getDrawableCategoria(fav.getId_categoria()), 
 						   fav.getNome_categoria(), 
 						   fav.getId_categoria(), 
 						   0,
-						   new int[]{0,0,0}, 
-						   new int[]{0,0,0} );
+						   new int[]{rgbListaLojas[0],rgbListaLojas[1],rgbListaLojas[2]}, 
+						   new int[]{rgbListaLojas[3],rgbListaLojas[4],rgbListaLojas[5]} );
 				   
 				   intent.putExtra("categoria", cat);
 				   intent.putExtra("loja", loja);
 				   startActivity(intent);
-				   finish();
 				}
 			});
 
@@ -148,8 +149,34 @@ public class FavoritosActivity extends Activity {
 			});
 					
 		}else{
-			url = url+favoritos;
-			carregaFavoritos();
+			
+			if (activeNetworkInfo == null) { // verifica se tem conexao com a internet
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(FavoritosActivity.this);
+				builder.setMessage("Não foi possível estabelecer conexão, por favor verifique sua conexão com a internet.")
+						.setCancelable(false)
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int id) {
+										finish();
+									}
+								});
+				AlertDialog alert = builder.create();
+				alert.setTitle("Meu Saara");
+				alert.setIcon(R.drawable.icon);
+				alert.show();
+
+				
+			}else{
+				progress = new ProgressDialog(FavoritosActivity.this);
+				progress.setMessage("Carregando favoritos...");
+				progress.setTitle("Meu Saara");
+				progress.show();
+				url = url+favoritos;
+				carregaFavoritos();
+			}
 		}
 	}
 	

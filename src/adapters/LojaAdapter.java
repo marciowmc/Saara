@@ -4,6 +4,7 @@ import java.util.List;
 
 import beans.Lojas;
 import br.com.saara.R;
+import br.com.saara.util.Utilidade;
   
 import android.content.Context;
 import android.graphics.Color;
@@ -76,7 +77,7 @@ public class LojaAdapter extends BaseAdapter{
     
             holder = new ViewHolder();
             holder.icone = (ImageView)convertView.findViewById(R.id.imgIcon);
-            holder.pin   = (ImageView)convertView.findViewById(R.id.imgPin);
+            holder.favorito   = (ImageView)convertView.findViewById(R.id.imgPin);
             holder.title = (TextView) convertView.findViewById(R.id.txtTitle);
            
             convertView.setTag(holder);
@@ -85,17 +86,22 @@ public class LojaAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
  
+        if(Utilidade.checkLojaFavorita(context, estadoVO.getIdLoja())){
+        	holder.favorito.setImageResource(R.drawable.favoritos_pressed);
+        }
+        
         holder.title.setText(estadoVO.getNome());
         holder.icone.setImageResource(imgCategoria);
+        
         
         if (position % 2 == 0){
         	holder.title.setBackgroundColor(Color.argb(215,rgbLight[0], rgbLight[1],rgbLight[2] ));
     		holder.icone.setBackgroundColor(Color.rgb(rgbLight[0], rgbLight[1],rgbLight[2]));
-    		holder.pin.setBackgroundColor(Color.argb(125,rgbLight[0], rgbLight[1],rgbLight[2]));
+    		holder.favorito.setBackgroundColor(Color.argb(125,rgbLight[0], rgbLight[1],rgbLight[2]));
         }else{
         	holder.title.setBackgroundColor(Color.argb(215,rgbDark[0], rgbDark[1],rgbDark[2] ));
     		holder.icone.setBackgroundColor(Color.rgb(rgbDark[0], rgbDark[1],rgbDark[2]));
-    		holder.pin.setBackgroundColor(Color.argb(125,rgbDark[0], rgbDark[1],rgbDark[2]));
+    		holder.favorito.setBackgroundColor(Color.argb(125,rgbDark[0], rgbDark[1],rgbDark[2]));
         }
        
         return convertView;
@@ -105,6 +111,6 @@ public class LojaAdapter extends BaseAdapter{
     static class ViewHolder {
         public ImageView icone;
         public TextView title;
-        public ImageView pin;
+        public ImageView favorito;
     }
 }
