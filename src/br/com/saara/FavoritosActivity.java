@@ -88,6 +88,7 @@ public class FavoritosActivity extends Activity {
 				   intent.putExtra("categoria", cat);
 				   intent.putExtra("loja", loja);
 				   startActivity(intent);
+				   finish();
 				}
 			});
 
@@ -100,13 +101,23 @@ public class FavoritosActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Dialog dialog = new Dialog(FavoritosActivity.this,android.R.style.Theme_InputMethod);
+				final Dialog dialog = new Dialog(FavoritosActivity.this,android.R.style.Theme_InputMethod);
 				dialog.setContentView(R.layout.popup_info);
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 			    Button close = (Button) dialog.findViewById(R.id.btClose);
 			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
 			    WMLP.y = 100;  
 			    dialog.getWindow().setAttributes(WMLP);
+			    
+			    close.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
+			    
 			    dialog.show();
 			}
 		});
@@ -164,8 +175,8 @@ public class FavoritosActivity extends Activity {
 								fav.setId_loja(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
 								fav.setId_categoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria")));
 								fav.setNome_categoria(jsonArray.getJSONObject(i).getString("nome_categoria"));
-								fav.setRgbColor(new ColorRGB().getColorList(fav.getId_categoria()));
-								fav.setDrawable_categoria(new ColorRGB().getDrawableCategoria(fav.getId_categoria()));
+								fav.setRgbColor(new ColorRGB().getColorList(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
+								fav.setDrawable_categoria(new ColorRGB().getDrawableCategoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
 								listFavoritos.add(fav);
 								
 							}

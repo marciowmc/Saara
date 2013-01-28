@@ -14,6 +14,7 @@ import beans.Lojas;
 import br.com.saara.util.Utilidade;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class MapaActivity extends MapActivity {
 	private double latitude,longitude;
 	private Lojas loja;
 	private Categorias categoria;
+	private boolean isFavorite = false;
 	
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -51,6 +53,8 @@ public class MapaActivity extends MapActivity {
 		
 		latitude  = loja.getLatitude();
 		longitude = loja.getLongitude();
+		
+		ImageView imgFavoritos = (ImageView) findViewById(R.id.imgFavorito);
 		
 		TextView txtEnd       = (TextView) findViewById(R.id.txtEnd);
 		TextView txtCategoria = (TextView) findViewById(R.id.txtCategoria);
@@ -109,15 +113,24 @@ public class MapaActivity extends MapActivity {
 		txtCategoria.setText(categoria.getText());
 		txtTitle.setText(loja.getNome());
 		
+		int[] rgb =  categoria.getRgbColorListaLojas();
+		
+		txtTitle.setBackgroundColor(Color.argb(215,rgb[0], rgb[1],rgb[2] ));
+		imgCategoria.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
+		imgFavarito.setBackgroundColor(Color.argb(125,rgb[0], rgb[1],rgb[2]));
+		
 		btFavoritos.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
-				imgFavarito.setImageResource(R.drawable.favoritos_pressed);
-				Toast.makeText(MapaActivity.this, "Loja adicionada aos favoritos.", Toast.LENGTH_LONG).show();
-				
+				if(isFavorite){
+					Toast.makeText(MapaActivity.this, "Essa loja já foi adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+				}else{
+					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
+					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
+					Toast.makeText(MapaActivity.this, "Loja adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 		
@@ -127,6 +140,7 @@ public class MapaActivity extends MapActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				onBackPressed();
+				finish();
 			}
 		});
 		
@@ -142,9 +156,12 @@ public class MapaActivity extends MapActivity {
 
 		String lojasFavoritas = Utilidade.getFavorite(MapaActivity.this);
 		if(lojasFavoritas != null){
-			if(lojasFavoritas.contains(""+loja.getIdLoja())){
-				btFavoritoTopo.setBackgroundResource(R.drawable.favoritos_hover);
-				btFavoritos.setEnabled(false);
+			String[] lojas = lojasFavoritas.split(",");
+			for(int i=0;i<lojas.length;i++){
+				if(lojas[i].equalsIgnoreCase(""+loja.getIdLoja())){
+					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
+					isFavorite = true;	
+				}
 			}
 		}
 		
@@ -191,5 +208,12 @@ public class MapaActivity extends MapActivity {
 		public int size() {
 			return (items.size());
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 }

@@ -35,15 +35,22 @@ public class Utilidade {
 
 	public static void saveFavorite(Context ctx, int id_loja){
 		
-		SharedPreferences pref = ctx.getSharedPreferences("SAARA_APP", Context.MODE_PRIVATE);
+		SharedPreferences pref = ctx.getSharedPreferences("APP__MEU_SAARA", Context.MODE_PRIVATE);
 		Editor editor = pref.edit();
-		editor.putString("lojas", ""+id_loja+",");
-		editor.commit();
-		
+		String lojas = pref.getString("lojas", "");
+		if(lojas != null || lojas.length() > 0){
+			String[] ids = lojas.split(",");
+			for(int i=0; i < ids.length;i++){
+				if(!ids[i].equalsIgnoreCase(""+id_loja)){
+					editor.putString("lojas", lojas+id_loja+",");
+					editor.commit();			
+				}
+			}
+		}
 	}
 	
 	public static String getFavorite(Context ctx){
-		SharedPreferences pref = ctx.getSharedPreferences("SAARA_APP", Context.MODE_PRIVATE);
+		SharedPreferences pref = ctx.getSharedPreferences("APP__MEU_SAARA", Context.MODE_PRIVATE);
 		String lojas = pref.getString("lojas", null);
 		return lojas;
 	}

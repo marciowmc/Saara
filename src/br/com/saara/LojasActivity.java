@@ -11,8 +11,10 @@ import beans.Lojas;
 import br.com.saara.util.RestClientGet;
 import adapters.LojaAdapter;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -117,7 +119,7 @@ public class LojasActivity extends Activity {
 		listLojas = new ArrayList<Lojas>();
 		
 		progress = new ProgressDialog(LojasActivity.this);
-		progress.setTitle(getString(R.string.app_name));
+		progress.setTitle("Meu Saara");
 		progress.setMessage("Carregando lojas...");
 		progress.show();
 		
@@ -176,12 +178,32 @@ public class LojasActivity extends Activity {
 							
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							erroConexao();
 						}
 						
+					}else{
+						erroConexao();
 					}
+				}else{
+					erroConexao();
 				}
 			}
 		}.start();
+	}
+	
+	public void erroConexao(){
+		final AlertDialog.Builder alert = new AlertDialog.Builder(LojasActivity.this);
+		alert.setTitle("Meu Saara");
+		alert.setMessage("Não foi possível carregar as lojas, por favor verifique sua conexão");
+		alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.cancel();
+			}
+		});
+		alert.create();
+		alert.show();
 	}
 }
