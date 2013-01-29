@@ -176,9 +176,13 @@ public class FavoritosActivity extends Activity {
 							
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							erroConexao();
 						}
+					}else{
+						erroConexao();
 					}
+				}else{
+					erroConexao();
 				}
 			}
 		}.start();
@@ -204,10 +208,9 @@ public class FavoritosActivity extends Activity {
 
 		if( favoritos == null || favoritos.trim().length() == 0){
 			AlertDialog.Builder alert = new AlertDialog.Builder(FavoritosActivity.this);
-			alert.setMessage("Você ainda não escolheu nenhuma loja como favorita.");
-			alert.setTitle("Meu Saara");
-			alert.setIcon(R.drawable.icon);
-			alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+			alert.setMessage(getString(R.string.favoritos_vazio));
+			alert.setTitle(getString(R.string.app_name));
+			alert.setNeutralButton(getString(R.string.bt_dialogo_ok), new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -223,9 +226,9 @@ public class FavoritosActivity extends Activity {
 			if (activeNetworkInfo == null) { // verifica se tem conexao com a internet
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(FavoritosActivity.this);
-				builder.setMessage("Não foi possível estabelecer conexão, por favor verifique sua conexão com a internet.")
+				builder.setMessage(getString(R.string.error_conexao_internet))
 						.setCancelable(false)
-						.setPositiveButton("OK",
+						.setPositiveButton(getString(R.string.bt_dialogo_ok),
 								new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog,
@@ -234,21 +237,46 @@ public class FavoritosActivity extends Activity {
 									}
 								});
 				AlertDialog alert = builder.create();
-				alert.setTitle("Meu Saara");
-				alert.setIcon(R.drawable.icon);
+				alert.setTitle(getString(R.string.app_name));
 				alert.show();
 
 				
 			}else{
 				progress = new ProgressDialog(FavoritosActivity.this);
-				progress.setMessage("Carregando favoritos...");
-				progress.setTitle("Meu Saara");
+				progress.setMessage(getString(R.string.load_favoritos));
+				progress.setTitle(getString(R.string.app_name));
 				progress.show();
 				getURL = URL+favoritos;
 				carregaFavoritos();
 			}
 		}
 		
+	}
+	
+	public void erroConexao(){
+		myHandler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				final AlertDialog.Builder alert = new AlertDialog.Builder(FavoritosActivity.this);
+				alert.setTitle(getString(R.string.app_name));
+				alert.setMessage(getString(R.string.error_load_lojas));
+				alert.setNeutralButton(getString(R.string.bt_dialogo_ok), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						dialog.cancel();
+						progress.dismiss();
+						finish();
+						
+					}
+				});
+				alert.create();
+				alert.show();
+			}
+		});
 	}
 }
 	

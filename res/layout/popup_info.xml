@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="5dp"
-            android:text="DAS 8H ÀS 19H"
+            android:text="@string/popup_info_hora_semana"
              android:paddingLeft="30dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -24,7 +24,7 @@
             android:layout_below="@+id/textView3"
             android:layout_marginTop="20dp"
             android:paddingLeft="30dp"
-            android:text="SÁBADO"
+            android:text="@string/popup_info_sabado"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView4"
             android:layout_marginTop="5dp"
-            android:text="DAS 9H ÀS 14H"
+            android:text="@string/popup_info_hora_sabado"
              android:paddingLeft="30dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -44,7 +44,7 @@
             android:layout_below="@+id/textView1"
             android:layout_marginTop="20dp"
             android:paddingLeft="30dp"
-            android:text="SEGUNDA À SEXTA "
+            android:text="@string/popup_info_semana"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:paddingLeft="20dp"
             android:layout_marginTop="76dp"
             android:paddingRight="20dp"
-            android:text="FUNCIONAMENTO"
+            android:text="@string/popup_info_titulo"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button

@@ -130,11 +130,11 @@ public class MapaActivity extends MapActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(isFavorite){
-					Toast.makeText(MapaActivity.this, "Essa loja já foi adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_erro_add_favoritos), Toast.LENGTH_LONG).show();
 				}else{
 					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
 					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
-					Toast.makeText(MapaActivity.this, "Loja adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_add_favoritos), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -176,14 +176,14 @@ public class MapaActivity extends MapActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(isFavorite){
-					Toast.makeText(MapaActivity.this, "Loja removida dos favoritos.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_remove_favoritos), Toast.LENGTH_LONG).show();
 					Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
 					imgFavoritos.setImageResource(R.drawable.favoritos_lojas);
 					isFavorite = false;
 				}else{
 					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
 					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
-					Toast.makeText(MapaActivity.this, "Loja adicionada aos favoritos.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_add_favoritos), Toast.LENGTH_LONG).show();
 					isFavorite = true;
 				}
 			}

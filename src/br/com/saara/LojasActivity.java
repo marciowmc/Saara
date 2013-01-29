@@ -132,9 +132,9 @@ public class LojasActivity extends Activity {
 		if (activeNetworkInfo == null) {
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(LojasActivity.this);
-			builder.setMessage("Não foi possível estabelecer conexão, por favor verifique sua conexão com a internet.")
+			builder.setMessage(getString(R.string.error_conexao_internet))
 					.setCancelable(false)
-					.setPositiveButton("OK",
+					.setPositiveButton(getString(R.string.bt_dialogo_ok),
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
@@ -143,15 +143,15 @@ public class LojasActivity extends Activity {
 								}
 							});
 			AlertDialog alert = builder.create();
-			alert.setTitle("Meu Saara");
+			alert.setTitle(getString(R.string.app_name));
 			alert.setIcon(R.drawable.icon);
 			alert.show();
 
 		}else{
 		
 			progress = new ProgressDialog(LojasActivity.this);
-			progress.setTitle("Meu Saara");
-			progress.setMessage("Carregando lojas...");
+			progress.setTitle(getString(R.string.app_name));
+			progress.setMessage(getString(R.string.load_lojas));
 			progress.show();
 			
 			adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
@@ -224,19 +224,28 @@ public class LojasActivity extends Activity {
 	}
 	
 	public void erroConexao(){
-		final AlertDialog.Builder alert = new AlertDialog.Builder(LojasActivity.this);
-		alert.setTitle("Meu Saara");
-		alert.setMessage("Não foi possível carregar as lojas, por favor verifique sua conexão");
-		alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		myHandler.post(new Runnable() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void run() {
 				// TODO Auto-generated method stub
-				dialog.cancel();
+				final AlertDialog.Builder alert = new AlertDialog.Builder(LojasActivity.this);
+				alert.setTitle(getString(R.string.app_name));
+				alert.setMessage(getString(R.string.error_load_lojas));
+				alert.setNeutralButton(getString(R.string.bt_dialogo_ok), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						dialog.cancel();
+						progress.dismiss();
+						finish();
+					}
+				});
+				alert.create();
+				alert.show();
 			}
 		});
-		alert.create();
-		alert.show();
 	}
 	
 	@Override

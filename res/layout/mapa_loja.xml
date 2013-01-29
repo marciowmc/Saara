@@ -124,7 +124,6 @@
                     android:gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:text="ALIMENTACAO"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#AD9161" />
 
@@ -151,7 +150,6 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="RUA REGENTE FEIJÓ, 91 - CENTRO - RIO DE JANEIRO"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#96712D" />
 
@@ -172,7 +170,7 @@
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:maxLines="2"
-            android:text="ENVIAR PARA FAVORITOS"
+            android:text="@string/bt_add_favoritos"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

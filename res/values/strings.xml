@@ -1,62 +1,61 @@
 <resources>
-
     <string name="app_name">Meu Saara</string>
     <string name="title_activity_saara">Meu Saara</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="bt_login">LOGIN</string>
     <string name="bt_facebook">FACEBOOK</string>
     <string name="categoria_titulo">CATEGORIAS</string>
-    
-    <string name="alimentacao">ALIMENTAÇÃO</string>
-    <string name="armarinhos">ARMARINHOS</string>
-    <string name="esportivos">ARTIGOS ESPORTIVOS</string>
-    <string name="festas">ARTIGOS DE FESTA</string>
-    <string name="artesanato">ARTESANATO</string>
-    <string name="bancos">BANCOS</string>
-    <string name="bazares">BAZARES</string>
-    <string name="bijuterias">BIJUTERIAS</string>
-    <string name="brinquedos">BRINQUEDOS</string>
-	<string name="calcados">CALÇADOS, BOLSAS E MALAS</string>
-	<string name="cama">CAMA, MESA E BANHO</string>
-	<string name="carnaval">CARNAVAL</string>
-	<string name="confeccao">CONFECÇÃO</string>
-	<string name="decoracao">DECORAÇÃO</string>
-	<string name="embalagens">DESCARTÁVEIS E EMBALAGENS</string>
-	<string name="drogaria">FARMÁCIA</string>
-	<string name="emporio">EMPÓRIO</string>
-	<string name="estacionamento">ESTACIONAMENTO</string>
-	<string name="ferragens">FERRAMENTAS</string>
-	<string name="flor">FLORES</string>
-	<string name="joias">JÓIAS E RELÓGIOS</string>
-	<string name="bares">BARES, LANCHONETES E RESTAURANTES</string>
-	<string name="lingerie">LINGERIE E ERÓTICA</string>
-	<string name="malhas">MALHAS E PRAIA</string>
-	<string name="moda">MODA INDIANA</string>
-	<string name="palhas">PALHAS</string>
-	<string name="papelaria">PAPELARIA</string>
-	<string name="perfumes">PERFUMES E COSMÉTICOS</string>
-	<string name="plasticos">PLÁSTICOS E BORRACHAS</string>
-	<string name="presentes">PRESENTES</string>
-	<string name="feminina">ROUPA FEMININA</string>
-	<string name="infantil">ROUPA INFANTIL</string>
-	<string name="silk">SILK E TRANSFER</string>
-	<string name="tecidos">TECIDOS</string>
-	<string name="vestuario">VESTUÁRIO GERAL</string>
-	<string name="outros">OUTROS</string>
-	
-	
- 
-
-
-
-
-
-
-
-
-
-
-
-        
-
+    <string name="alimentacao">FOOD</string>
+    <string name="armarinhos">SEWING MATERIALS</string>
+    <string name="esportivos">ITEMS FOR SPORTS</string>
+    <string name="festas">ITEMS FOR PARTIES</string>
+    <string name="artesanato">HANDICRAFT</string>
+    <string name="bancos">BANKS</string>
+    <string name="bazares">BAZAARS</string>
+    <string name="bijuterias">JEWELRY</string>
+    <string name="brinquedos">TOYS</string>
+ <string name="calcados">SHOES, BAGS</string>
+ <string name="cama">HOME</string>
+ <string name="carnaval">CARNIVAL</string>
+ <string name="confeccao">MAKING</string>
+ <string name="decoracao">DECORATION</string>
+ <string name="embalagens">DISPOSABLES AND PACKAGING</string>
+ <string name="drogaria">DRUGSTORE</string>
+ <string name="emporio">EMPORIUM</string>
+ <string name="estacionamento">PARKING</string>
+ <string name="ferragens">TOOLS</string>
+ <string name="flor">FLOWERS</string>
+ <string name="joias">JEWELRY AND WATCHES</string>
+ <string name="bares">BARES, LANCHONETES E RESTAURANTES</string>
+ <string name="lingerie">LINGERIE AND EROTICA</string>
+ <string name="malhas">KNITS AND BEACH</string>
+ <string name="moda">INDIAN FASHION</string>
+ <string name="palhas">STRAWS</string>
+ <string name="papelaria">STATIONERY</string>
+ <string name="perfumes">PERFUME AND COSMETICS</string>
+ <string name="plasticos">PLASTICS AND RUBBER</string>
+ <string name="presentes">GIFTS</string>
+ <string name="feminina">WOMENS CLOTHING</string>
+ <string name="infantil">CHILDRENS CLOTHING</string>
+ <string name="silk">SILK AND TRANSFER</string>
+ <string name="tecidos">TECIDOS</string>
+ <string name="vestuario">CLOTHES</string>
+ <string name="outros">OTHERS</string>
+ <string name="bt_dialogo_sim">YES</string>
+ <string name="bt_dialogo_nao">NO</string>
+ <string name="bt_dialogo_ok">OK</string>
+ <string name="dialogo_sair_app">Do you really want to leave?</string> 
+  <string name="bt_add_favoritos">Send to Favorite</string>
+  <string name="popup_info_titulo">INFORMATION</string>
+  <string name="popup_info_semana">Monday to Friday:</string>
+  <string name="popup_info_hora_semana">8h to 19h</string>
+  <string name="popup_info_sabado">Saturday:</string>
+  <string name="popup_info_hora_sabado">9h to 14h</string>
+  <string name="mapa_msg_add_favoritos">Store added to favorites.</string>
+  <string name="mapa_msg_remove_favoritos">Store removed from favorites.</string>
+  <string name="mapa_msg_erro_add_favoritos">This store has been added to favorites.</string>
+  <string name="error_conexao_internet">No connection. Please check your internet.</string>
+  <string name="load_lojas">Loading stores...</string>
+  <string name="error_load_lojas">Unable to load the stores. Please check your internet.</string>
+  <string name="favoritos_vazio">You dont have favorite stores.</string>
+ <string name="load_favoritos">Loading favorites...</string>
 </resources>

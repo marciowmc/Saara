@@ -147,9 +147,9 @@ public class CategoriasActivity extends Activity  {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(CategoriasActivity.this);
-		alert.setTitle("Meu Saara");
-		alert.setMessage("Deseja realmente sair ?");
-		alert.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+		alert.setTitle(getString(R.string.app_name));
+		alert.setMessage(getString(R.string.dialogo_sair_app));
+		alert.setPositiveButton(getString(R.string.bt_dialogo_sim), new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -159,7 +159,7 @@ public class CategoriasActivity extends Activity  {
 			}
 		});
 		
-		alert.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton(getString(R.string.bt_dialogo_nao), new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
