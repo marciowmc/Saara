@@ -1,9 +1,7 @@
 <resources>
 
-    <string name="app_name">Saara</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_saara">Saara</string>
+    <string name="app_name">Meu Saara</string>
+    <string name="title_activity_saara">Meu Saara</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="bt_login">LOGIN</string>
     <string name="bt_facebook">FACEBOOK</string>
@@ -24,26 +22,26 @@
 	<string name="confeccao">CONFECÇÃO</string>
 	<string name="decoracao">DECORAÇÃO</string>
 	<string name="embalagens">DESCARTÁVEIS E EMBALAGENS</string>
-	<string name="drogaria">DROGARIA / FARMÁCIA</string>
+	<string name="drogaria">FARMÁCIA</string>
 	<string name="emporio">EMPÓRIO</string>
 	<string name="estacionamento">ESTACIONAMENTO</string>
-	<string name="ferragens">FERRAGENS / FERRAMENTAS</string>
-	<string name="flor">FLOR</string>
-	<string name="joias">JÓIAS / RELÓGIOS</string>
-	<string name="bares">BARES, LANCHONETES e RESTAURANTES</string>
-	<string name="lingerie">LINGERIE / ERÓTICA</string>
-	<string name="malhas">MALHAS e PRAIA</string>
+	<string name="ferragens">FERRAMENTAS</string>
+	<string name="flor">FLORES</string>
+	<string name="joias">JÓIAS E RELÓGIOS</string>
+	<string name="bares">BARES, LANCHONETES E RESTAURANTES</string>
+	<string name="lingerie">LINGERIE E ERÓTICA</string>
+	<string name="malhas">MALHAS E PRAIA</string>
 	<string name="moda">MODA INDIANA</string>
 	<string name="palhas">PALHAS</string>
 	<string name="papelaria">PAPELARIA</string>
-	<string name="perfumes">PERFUMES / COSMÉTICOS</string>
-	<string name="plasticos">PLÁSTICOS / BORRACHAS</string>
+	<string name="perfumes">PERFUMES E COSMÉTICOS</string>
+	<string name="plasticos">PLÁSTICOS E BORRACHAS</string>
 	<string name="presentes">PRESENTES</string>
 	<string name="feminina">ROUPA FEMININA</string>
 	<string name="infantil">ROUPA INFANTIL</string>
-	<string name="silk">SILK / TRANSFER</string>
+	<string name="silk">SILK E TRANSFER</string>
 	<string name="tecidos">TECIDOS</string>
-	<string name="vestuario">VESTUÁRIO / GERAL</string>
+	<string name="vestuario">VESTUÁRIO GERAL</string>
 	<string name="outros">OUTROS</string>
 	
 	

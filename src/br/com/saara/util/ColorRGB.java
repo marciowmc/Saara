@@ -59,7 +59,7 @@ public class ColorRGB {
 			break;
 		}
 		
-		case 0:{
+		case 10:{
 			rgb = new int[]{242,100,61,227,88,49};
 			break;
 		}

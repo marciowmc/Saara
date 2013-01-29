@@ -12,11 +12,5 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logi, menu);
-        return true;
-    }
-
-    
+   
 }

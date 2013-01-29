@@ -3,6 +3,7 @@ package br.com.saara;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bugsense.trace.BugSenseHandler;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
@@ -47,6 +48,7 @@ public class MapaActivity extends MapActivity {
 	protected void onCreate(Bundle icicle) {
 		// TODO Auto-generated method stub
 		super.onCreate(icicle);
+		BugSenseHandler.initAndStartSession(MapaActivity.this, "c8c053dd");
 		setContentView(R.layout.mapa_loja);
 		
 		Bundle params = getIntent().getExtras();
@@ -174,32 +176,10 @@ public class MapaActivity extends MapActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(isFavorite){
-					AlertDialog.Builder dialog = new AlertDialog.Builder(MapaActivity.this);
-					dialog.setTitle("Meu Saara");
-					dialog.setMessage("Deseja remover dos favoritos ?");
-					dialog.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							Toast.makeText(MapaActivity.this, "Loja removida dos favoritos.", Toast.LENGTH_LONG).show();
-							Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
-							imgFavoritos.setImageResource(R.drawable.favoritos_lojas);
-							isFavorite = false;
-							
-						}
-					});
-					
-					dialog.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-						}
-					});
-					
+					Toast.makeText(MapaActivity.this, "Loja removida dos favoritos.", Toast.LENGTH_LONG).show();
+					Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
+					imgFavoritos.setImageResource(R.drawable.favoritos_lojas);
+					isFavorite = false;
 				}else{
 					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
 					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
@@ -209,7 +189,7 @@ public class MapaActivity extends MapActivity {
 			}
 		});
 		
-		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_pin_cliente);
+		Drawable drawable = this.getResources().getDrawable(R.drawable.marker_map);
 		
 		GeoPoint gp = new GeoPoint((int)(loja.getLatitude()*1E6), (int)(loja.getLongitude()*1E6));
 		
@@ -259,5 +239,12 @@ public class MapaActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		BugSenseHandler.closeSession(MapaActivity.this);
 	}
 }

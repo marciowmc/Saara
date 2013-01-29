@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.bugsense.trace.BugSenseHandler;
+
 import beans.Categorias;
 import beans.Lojas;
 import br.com.saara.util.RestClientGet;
@@ -44,6 +46,9 @@ public class LojasActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		BugSenseHandler.initAndStartSession(LojasActivity.this, "c8c053dd");
+		
 		setContentView(R.layout.lojas);
 
 		Bundle params = getIntent().getExtras();
@@ -232,5 +237,12 @@ public class LojasActivity extends Activity {
 		});
 		alert.create();
 		alert.show();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		BugSenseHandler.closeSession(LojasActivity.this);
 	}
 }

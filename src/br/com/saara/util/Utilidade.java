@@ -71,6 +71,8 @@ public class Utilidade {
 					updateFavoritos += ids[i]+",";
 				}
 			}
+			editor.remove("lojas");
+			editor.commit();
 			editor.putString("lojas",updateFavoritos);
 			editor.commit();
 		}

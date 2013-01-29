@@ -86,6 +86,7 @@ public class FavoritoAdapter extends BaseAdapter{
  
         holder.title.setText(estadoVO.getNome_loja());
         holder.icone.setImageResource(estadoVO.getDrawable_categoria());
+        holder.pin.setImageResource(R.drawable.favoritos_pressed);
         
         int rgb[] = estadoVO.getRgbColor();
         
