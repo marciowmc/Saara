@@ -43,6 +43,7 @@
 	<string name="bt_dialogo_sim">SI</string>
 	<string name="bt_dialogo_nao">NO</string>
 	<string name="bt_dialogo_ok">OK</string>
+	<string name="bt_navigator">LLÉVAME A TIENDA</string>
 	<string name="dialogo_sair_app">¿Quieres salir?</string>	
  	<string name="bt_add_favoritos">AÑADIR A FAVORITOS</string>
  	<string name="popup_info_titulo">INFORMACIÓN</string>

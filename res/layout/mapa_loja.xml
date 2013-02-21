@@ -154,7 +154,7 @@
             android:textColor="#96712D" />
 
         <Button
-            android:id="@+id/btFavoritoRodape"
+            android:id="@+id/btNavigator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtEnd"
@@ -163,14 +163,13 @@
             android:layout_marginRight="5dp"
             android:background="#DFD0AF"
             android:drawablePadding="10dp"
-            android:drawableRight="@drawable/favoritos_pressed"
             android:gravity="center|center_horizontal|center_vertical"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:maxLines="2"
-            android:text="@string/bt_add_favoritos"
+            android:text="@string/bt_navigator"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

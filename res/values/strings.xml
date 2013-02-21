@@ -45,6 +45,7 @@
  <string name="bt_dialogo_ok">OK</string>
  <string name="dialogo_sair_app">Do you really want to leave?</string> 
   <string name="bt_add_favoritos">Send to Favorite</string>
+  <string name="bt_navigator">TAKE ME TO STORE</string>
   <string name="popup_info_titulo">INFORMATION</string>
   <string name="popup_info_semana">Monday to Friday:</string>
   <string name="popup_info_hora_semana">8h to 19h</string>

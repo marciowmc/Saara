@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,11 +67,10 @@ public class MapaActivity extends MapActivity {
 		TextView txtTitle     = (TextView) findViewById(R.id.txtTitle);
 		
 		Button btVoltar       = (Button) findViewById(R.id.btVoltar);
-		Button btFavoritos    = (Button) findViewById(R.id.btFavoritoRodape);
 		Button btFavoritoTopo = (Button) findViewById(R.id.btFavoritos);
 		Button btSegmentos    = (Button) findViewById(R.id.btSegmentos);
 		Button btInfo         = (Button) findViewById(R.id.btInformacoes);
-		
+		Button btNavigator    = (Button) findViewById(R.id.btNavigator);
 		
 		btFavoritoTopo.setOnClickListener(new View.OnClickListener() {
 			
@@ -124,18 +124,15 @@ public class MapaActivity extends MapActivity {
 		imgCategoria.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
 		imgFavarito.setBackgroundColor(Color.argb(125,rgb[0], rgb[1],rgb[2]));
 		
-		btFavoritos.setOnClickListener(new View.OnClickListener() {
+		btNavigator.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(isFavorite){
-					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_erro_add_favoritos), Toast.LENGTH_LONG).show();
-				}else{
-					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());
-					imgFavarito.setImageResource(R.drawable.favoritos_pressed);
-					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_add_favoritos), Toast.LENGTH_LONG).show();
-				}
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+						Uri.parse("google.navigation:q=" + latitude + ","
+								+ longitude + "&mode=w"));
+				startActivity(intent);
 			}
 		});
 		
