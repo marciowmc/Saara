@@ -14,6 +14,7 @@ public class Lojas implements Serializable {
 	private int idLoja;
 	private int id_categoria;
 	private String categoria;
+	private int likes;
 	
 	public String getCategoria() {
 		return categoria;
@@ -83,6 +84,14 @@ public class Lojas implements Serializable {
 	}
 	public void setIdLoja(int idLoja) {
 		this.idLoja = idLoja;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

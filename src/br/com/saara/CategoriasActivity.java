@@ -52,8 +52,7 @@ public class CategoriasActivity extends Activity  {
 				
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 
-			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
-			    WMLP.y = 80;   //y position
+			    WMLP.gravity = Gravity.CENTER;
 			    dialog.getWindow().setAttributes(WMLP);
 			    
 			    btClose.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +132,6 @@ public class CategoriasActivity extends Activity  {
 						int position, long id) {
 				   Intent intent = new Intent();
 				   intent.setClass(CategoriasActivity.this, LojasActivity.class);
-				   Log.i("Local", "Categorias id : "+ arrayCategorias.get(position).getIdCategoria());
 				   intent.putExtra("categoria",arrayCategorias.get(position));	
 				   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

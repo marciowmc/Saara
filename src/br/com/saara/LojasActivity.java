@@ -69,8 +69,7 @@ public class LojasActivity extends Activity {
 				Button btclose = (Button) dialog.findViewById(R.id.btClose);
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 
-			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
-			    WMLP.y = 100;   //y position
+			    WMLP.gravity = Gravity.CENTER;
 			    dialog.getWindow().setAttributes(WMLP);
 			    
 			    btclose.setOnClickListener(new View.OnClickListener() {
@@ -195,6 +194,11 @@ public class LojasActivity extends Activity {
 								loja.setLatitude(Double.parseDouble(jsonArray.getJSONObject(i).getString("latitude")));
 								loja.setLongitude(Double.parseDouble(jsonArray.getJSONObject(i).getString("longitude")));
 								loja.setIdLoja(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
+								try{
+									loja.setLikes(Integer.parseInt(jsonArray.getJSONObject(i).getString("likes")));
+								}catch(Exception e){
+									loja.setLikes(0);
+								}
 								listLojas.add(loja);
 							}
 							
@@ -254,4 +258,6 @@ public class LojasActivity extends Activity {
 		super.onDestroy();
 		BugSenseHandler.closeSession(LojasActivity.this);
 	}
+	
+	
 }

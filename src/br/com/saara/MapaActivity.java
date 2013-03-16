@@ -1,6 +1,9 @@
 package br.com.saara;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.bugsense.trace.BugSenseHandler;
@@ -12,21 +15,29 @@ import com.google.android.maps.OverlayItem;
 
 import beans.Categorias;
 import beans.Lojas;
+import br.com.saara.util.RestClientGet;
 import br.com.saara.util.Utilidade;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +49,11 @@ public class MapaActivity extends MapActivity {
 	private Categorias categoria;
 	private boolean isFavorite = false;
 	private ImageView imgFavoritos;
+	private ImageView imgLike;
+	private String IMEI;
+	private String hash;
+	private TextView txtLike;
+	protected ProgressDialog progress;
 	
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -61,16 +77,55 @@ public class MapaActivity extends MapActivity {
 		longitude = loja.getLongitude();
 		
 		imgFavoritos = (ImageView) findViewById(R.id.imgFavorito);
+		imgLike = (ImageView) findViewById(R.id.imgCurti);
+		
+		imgLike.setOnClickListener(new View.OnClickListener() {
+			
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				progress = new ProgressDialog(MapaActivity.this);
+				progress.setMessage(getString(R.string.load_like));
+				progress.setTitle(getString(R.string.app_name));
+				progress.setIcon(R.drawable.icon);
+				progress.show();
+				
+				String like = txtLike.getText().toString();
+				int likes = Integer.parseInt(like)+1;
+				txtLike.setText(""+likes);
+				
+				saveLike();
+			}
+		});
 		
 		TextView txtEnd       = (TextView) findViewById(R.id.txtEnd);
 		TextView txtCategoria = (TextView) findViewById(R.id.txtCategoria);
 		TextView txtTitle     = (TextView) findViewById(R.id.txtTitle);
+		txtLike               = (TextView) findViewById(R.id.txtLike);
+		txtLike.setText(""+loja.getLikes());
 		
 		Button btVoltar       = (Button) findViewById(R.id.btVoltar);
 		Button btFavoritoTopo = (Button) findViewById(R.id.btFavoritos);
 		Button btSegmentos    = (Button) findViewById(R.id.btSegmentos);
 		Button btInfo         = (Button) findViewById(R.id.btInformacoes);
 		Button btNavigator    = (Button) findViewById(R.id.btNavigator);
+		Button btCall         = (Button) findViewById(R.id.btCall);
+		
+		if(loja.getTelefone().trim().length() < 4){
+			btCall.setEnabled(false);
+		}
+		
+		btCall.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Uri callUri = Uri.parse("tel:" + loja.getTelefone());
+				Intent i = new Intent(Intent.ACTION_CALL, callUri);
+				startActivity(i);
+			}
+		});
 		
 		btFavoritoTopo.setOnClickListener(new View.OnClickListener() {
 			
@@ -92,8 +147,7 @@ public class MapaActivity extends MapActivity {
 				Button close = (Button) dialog.findViewById(R.id.btClose);
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 
-			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
-			    WMLP.y = 120;   //y position
+			    WMLP.gravity = Gravity.CENTER;
 			    dialog.getWindow().setAttributes(WMLP);
 			    
 			    close.setOnClickListener(new View.OnClickListener() {
@@ -109,10 +163,10 @@ public class MapaActivity extends MapActivity {
 			}
 		});
 		
-		ImageView imgCategoria = (ImageView) findViewById(R.id.imgCategoria);
+		RelativeLayout curtidas = (RelativeLayout) findViewById(R.id.curtidas);
 		final ImageView imgFavarito  = (ImageView) findViewById(R.id.imgFavorito);
 		
-		imgCategoria.setImageResource(categoria.getIcon());
+		//imgCategoria.setImageResource(categoria.getIcon());
 		
 		txtEnd.setText(loja.getEndereco());
 		txtCategoria.setText(categoria.getText());
@@ -121,7 +175,7 @@ public class MapaActivity extends MapActivity {
 		int[] rgb =  categoria.getRgbColorListaLojas();
 		
 		txtTitle.setBackgroundColor(Color.argb(215,rgb[0], rgb[1],rgb[2] ));
-		imgCategoria.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
+		curtidas.setBackgroundColor(Color.rgb(rgb[0], rgb[1],rgb[2]));
 		imgFavarito.setBackgroundColor(Color.argb(125,rgb[0], rgb[1],rgb[2]));
 		
 		btNavigator.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +221,19 @@ public class MapaActivity extends MapActivity {
 			}
 		}
 		
+		String likeLoja = Utilidade.getLike(MapaActivity.this);
+		if(likeLoja != null){
+			String[] likes = likeLoja.split(",");
+			for(int i=0;i<likes.length;i++){
+				if(likes[i].equalsIgnoreCase(""+loja.getIdLoja())){
+					imgLike.setImageResource(R.drawable.curti_ativo);
+					imgLike.setEnabled(false);
+					isFavorite = true;	
+				}
+			}
+		}
+		
+		
 		imgFavoritos.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -199,6 +266,51 @@ public class MapaActivity extends MapActivity {
 		
 		map.getOverlays().add(new SitesOverlay(drawable));
 		
+		IMEI = Utilidade.getIMEI(MapaActivity.this);
+		Calendar calendar = Calendar.getInstance();
+		try {
+			hash = Utilidade.SHA1(getPackageName());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		if(!Utilidade.getShowPopup(MapaActivity.this) && metrics.heightPixels > 300){
+			final Dialog dialog = new Dialog(MapaActivity.this,android.R.style.Theme_InputMethod);
+			dialog.setContentView(R.layout.popup_curti);
+			Button close = (Button) dialog.findViewById(R.id.btClose);
+			final CheckBox check = (CheckBox) dialog.findViewById(R.id.checkBox1);
+			WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
+	
+			WMLP.gravity = Gravity.CENTER;
+			dialog.getWindow().setAttributes(WMLP);
+	
+			close.setOnClickListener(new View.OnClickListener() {
+	
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+					Utilidade.saveShowPopup(MapaActivity.this, check.isChecked());
+								
+				}
+			});
+	
+			dialog.setCancelable(false);
+			dialog.show();
+		}
 	}
 	
 	private class SitesOverlay extends ItemizedOverlay<OverlayItem> {
@@ -243,5 +355,47 @@ public class MapaActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		BugSenseHandler.closeSession(MapaActivity.this);
+	}
+	
+	
+	public void saveLike(){
+		
+		new Thread("saveLike"){
+			@Override
+			public void run() {
+				Looper.prepare();
+				
+				String url = "http://50.97.119.31/~i9app968/saara/postLike.php?id_loja="+loja.getIdLoja()+"&imei="+IMEI+"&hash="+hash;
+				RestClientGet get = new RestClientGet(url);
+				String[] retorno = get.restGet();
+				if(retorno==null){
+					
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							Toast.makeText(MapaActivity.this, getString(R.string.error_conexao_internet), Toast.LENGTH_LONG).show();
+						}
+					});
+					
+				}else{
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							imgLike.setImageResource(R.drawable.curti_ativo);
+							imgLike.setEnabled(false);
+							Utilidade.saveLike(MapaActivity.this, loja.getIdLoja());
+						}
+					});
+				}
+				
+				progress.dismiss();
+				
+				Looper.loop();
+			}
+		}.start();
 	}
 }

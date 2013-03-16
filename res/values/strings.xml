@@ -45,8 +45,10 @@
  <string name="bt_dialogo_ok">OK</string>
  <string name="dialogo_sair_app">Do you really want to leave?</string> 
   <string name="bt_add_favoritos">Send to Favorite</string>
-  <string name="bt_navigator">TAKE ME TO STORE</string>
+  <string name="bt_navigator">GO TO STORE</string>
+  <string name="bt_call">CALL</string>
   <string name="popup_info_titulo">INFORMATION</string>
+  <string name="popup_like">IF YOU VISIT THE STORE AND ENJOYED, CLICK HERE!</string>
   <string name="popup_info_semana">Monday to Friday:</string>
   <string name="popup_info_hora_semana">8h to 19h</string>
   <string name="popup_info_sabado">Saturday:</string>
@@ -56,7 +58,9 @@
   <string name="mapa_msg_erro_add_favoritos">This store has been added to favorites.</string>
   <string name="error_conexao_internet">No connection. Please check your internet.</string>
   <string name="load_lojas">Loading stores...</string>
+  <string name="load_like">Please wait...</string>
   <string name="error_load_lojas">Unable to load the stores. Please check your internet.</string>
   <string name="favoritos_vazio">You dont have favorite stores.</string>
  <string name="load_favoritos">Loading favorites...</string>
+ <string name="dont_show_popup">Don\'t show again</string>
 </resources>

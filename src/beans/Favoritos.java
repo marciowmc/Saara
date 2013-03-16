@@ -11,6 +11,8 @@ public class Favoritos {
 	private int id_loja;
 	private double latitude_loja;
 	private double longitude_loja;
+	private String telefone;
+	private int likes;
 	
 	
 	public double getLatitude_loja() {
@@ -66,6 +68,18 @@ public class Favoritos {
 	}
 	public void setId_loja(int id_loja) {
 		this.id_loja = id_loja;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

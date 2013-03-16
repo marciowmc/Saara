@@ -43,7 +43,9 @@
 	<string name="bt_dialogo_sim">SI</string>
 	<string name="bt_dialogo_nao">NO</string>
 	<string name="bt_dialogo_ok">OK</string>
-	<string name="bt_navigator">LLÉVAME A TIENDA</string>
+	<string name="bt_navigator">IR A LA TIENDA</string>
+	<string name="popup_like">SI USTED VISITA LA TIENDA Y DISFRUTAR, HAGA CLIC AQUÍ</string>
+	<string name="bt_call">LHAMAR</string>
 	<string name="dialogo_sair_app">¿Quieres salir?</string>	
  	<string name="bt_add_favoritos">AÑADIR A FAVORITOS</string>
  	<string name="popup_info_titulo">INFORMACIÓN</string>
@@ -59,4 +61,6 @@
  	<string name="error_load_lojas">No se puede cargar las tiendas, por favor comprueba su conexión.</string>
  	<string name="favoritos_vazio">Usted no ha escogido una tienda como favorita.</string>
 	<string name="load_favoritos">Cargando favoritas...</string>
+	<string name="load_like">Cargando...</string>
+	<string name="dont_show_popup">No mostrar de nuevo</string>
 </resources>

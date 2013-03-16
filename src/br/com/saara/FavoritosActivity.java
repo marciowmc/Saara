@@ -78,6 +78,7 @@ public class FavoritosActivity extends Activity {
 				   loja.setIdLoja(fav.getId_loja());
 				   loja.setEndereco(fav.getEnd_loja());
 				   loja.setNome(fav.getNome_loja());
+				   loja.setTelefone(fav.getTelefone());
 				   
 				   ColorRGB rgb = new ColorRGB();
 				   int[] rgbListaLojas = fav.getRgbColor();
@@ -107,8 +108,7 @@ public class FavoritosActivity extends Activity {
 				dialog.setContentView(R.layout.popup_info);
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
 			    Button close = (Button) dialog.findViewById(R.id.btClose);
-			    WMLP.gravity = Gravity.TOP | Gravity.RIGHT;
-			    WMLP.y = 100;  
+			    WMLP.gravity = Gravity.CENTER;
 			    dialog.getWindow().setAttributes(WMLP);
 			    
 			    close.setOnClickListener(new View.OnClickListener() {
@@ -158,8 +158,14 @@ public class FavoritosActivity extends Activity {
 								fav.setId_loja(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
 								fav.setId_categoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria")));
 								fav.setNome_categoria(jsonArray.getJSONObject(i).getString("nome_categoria"));
+								fav.setTelefone(jsonArray.getJSONObject(i).getString("telefone"));
 								fav.setRgbColor(new ColorRGB().getColorList(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
 								fav.setDrawable_categoria(new ColorRGB().getDrawableCategoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
+								try{
+									fav.setLikes(Integer.parseInt(jsonArray.getJSONObject(i).getString("likes")));
+								}catch(Exception e){
+									fav.setLikes(0);
+								}
 								listFavoritos.add(fav);
 								
 							}

@@ -58,5 +58,9 @@
  	<string name="error_load_lojas">Não foi possível carregar as lojas, por favor verifique sua conexão.</string>
  	<string name="favoritos_vazio">Você ainda não tem lojas favoritas.</string>
 	<string name="load_favoritos">Carregando favoritos...</string>
-	<string name="bt_navigator">LEVE-ME A LOJA</string>
+	<string name="bt_navigator">IR À LOJA</string>
+	<string name="bt_call">LIGAR</string>
+	<string name="load_like">Curtindo a loja...</string>
+	<string name="popup_like">SE VOCÊ VISITOU A LOJA E CURTIU, CLIQUE AQUI !</string>
+	<string name="dont_show_popup">Não exibir novamente</string>
 </resources>
