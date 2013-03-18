@@ -228,7 +228,6 @@ public class MapaActivity extends MapActivity {
 				if(likes[i].equalsIgnoreCase(""+loja.getIdLoja())){
 					imgLike.setImageResource(R.drawable.curti_ativo);
 					imgLike.setEnabled(false);
-					isFavorite = true;	
 				}
 			}
 		}
@@ -242,7 +241,7 @@ public class MapaActivity extends MapActivity {
 				if(isFavorite){
 					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_remove_favoritos), Toast.LENGTH_LONG).show();
 					Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
-					imgFavoritos.setImageResource(R.drawable.favoritos_lojas);
+					imgFavoritos.setImageResource(R.drawable.menu_favoritos);
 					isFavorite = false;
 				}else{
 					Utilidade.saveFavorite(MapaActivity.this, loja.getIdLoja());

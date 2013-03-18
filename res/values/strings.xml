@@ -48,7 +48,7 @@
   <string name="bt_navigator">GO TO STORE</string>
   <string name="bt_call">CALL</string>
   <string name="popup_info_titulo">INFORMATION</string>
-  <string name="popup_like">IF YOU VISIT THE STORE AND ENJOYED, CLICK HERE!</string>
+  <string name="popup_like">IF YOU VISITED THE STORE AND ENJOYED, CLICK ON</string>
   <string name="popup_info_semana">Monday to Friday:</string>
   <string name="popup_info_hora_semana">8h to 19h</string>
   <string name="popup_info_sabado">Saturday:</string>

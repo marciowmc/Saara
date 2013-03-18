@@ -79,6 +79,7 @@ public class FavoritosActivity extends Activity {
 				   loja.setEndereco(fav.getEnd_loja());
 				   loja.setNome(fav.getNome_loja());
 				   loja.setTelefone(fav.getTelefone());
+				   loja.setLikes(fav.getLikes());
 				   
 				   ColorRGB rgb = new ColorRGB();
 				   int[] rgbListaLojas = fav.getRgbColor();
@@ -207,6 +208,7 @@ public class FavoritosActivity extends Activity {
 		super.onResume();
 
 		listFavoritos.clear();
+		
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 
@@ -248,11 +250,13 @@ public class FavoritosActivity extends Activity {
 
 				
 			}else{
+			
 				progress = new ProgressDialog(FavoritosActivity.this);
 				progress.setMessage(getString(R.string.load_favoritos));
 				progress.setTitle(getString(R.string.app_name));
 				progress.show();
 				getURL = URL+favoritos;
+				
 				carregaFavoritos();
 			}
 		}

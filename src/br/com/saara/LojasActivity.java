@@ -125,52 +125,6 @@ public class LojasActivity extends Activity {
 		
 		listLojas = new ArrayList<Lojas>();
 
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-
-		if (activeNetworkInfo == null) {
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(LojasActivity.this);
-			builder.setMessage(getString(R.string.error_conexao_internet))
-					.setCancelable(false)
-					.setPositiveButton(getString(R.string.bt_dialogo_ok),
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog,
-										int id) {
-									finish();
-								}
-							});
-			AlertDialog alert = builder.create();
-			alert.setTitle(getString(R.string.app_name));
-			alert.setIcon(R.drawable.icon);
-			alert.show();
-
-		}else{
-		
-			progress = new ProgressDialog(LojasActivity.this);
-			progress.setTitle(getString(R.string.app_name));
-			progress.setMessage(getString(R.string.load_lojas));
-			progress.show();
-			
-			adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
-			   
-		    listView.setAdapter(adapter);
-		       
-		    listView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-					   Intent intent = new Intent();
-					   intent.setClass(LojasActivity.this, MapaActivity.class);
-					   intent.putExtra("loja", listLojas.get(position));
-					   intent.putExtra("categoria", categoria);
-					   startActivity(intent);
-					}
-				});
-		       
-		       carregaLojas();
-		}
 	}
 	
 	public void carregaLojas(){
@@ -257,6 +211,62 @@ public class LojasActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		BugSenseHandler.closeSession(LojasActivity.this);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		listLojas.clear();
+
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+		if (activeNetworkInfo == null) {
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(LojasActivity.this);
+			builder.setMessage(getString(R.string.error_conexao_internet))
+					.setCancelable(false)
+					.setPositiveButton(getString(R.string.bt_dialogo_ok),
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int id) {
+									finish();
+								}
+							});
+			AlertDialog alert = builder.create();
+			alert.setTitle(getString(R.string.app_name));
+			alert.setIcon(R.drawable.icon);
+			alert.show();
+
+		}else{
+		
+			progress = new ProgressDialog(LojasActivity.this);
+			progress.setTitle(getString(R.string.app_name));
+			progress.setMessage(getString(R.string.load_lojas));
+			progress.show();
+			
+			adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
+			   
+		    listView.setAdapter(adapter);
+		       
+		    listView.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+					   Intent intent = new Intent();
+					   intent.setClass(LojasActivity.this, MapaActivity.class);
+					   intent.putExtra("loja", listLojas.get(position));
+					   intent.putExtra("categoria", categoria);
+					   startActivity(intent);
+					}
+				});
+		    
+		    carregaLojas();
+		       
+		}
+		
 	}
 	
 	

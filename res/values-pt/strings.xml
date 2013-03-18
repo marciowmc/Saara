@@ -61,6 +61,6 @@
 	<string name="bt_navigator">IR À LOJA</string>
 	<string name="bt_call">LIGAR</string>
 	<string name="load_like">Curtindo a loja...</string>
-	<string name="popup_like">SE VOCÊ VISITOU A LOJA E CURTIU, CLIQUE AQUI !</string>
+	<string name="popup_like">SE VOCÊ VISITOU A LOJA E CURTIU, CLIQUE EM </string>
 	<string name="dont_show_popup">Não exibir novamente</string>
 </resources>
