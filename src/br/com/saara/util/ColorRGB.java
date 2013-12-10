@@ -1,6 +1,5 @@
 package br.com.saara.util;
 
-import beans.Categorias;
 import br.com.saara.R;
 
 public class ColorRGB {

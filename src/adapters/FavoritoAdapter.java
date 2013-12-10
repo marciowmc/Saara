@@ -3,12 +3,10 @@ package adapters;
 import java.util.List;
 
 import beans.Favoritos;
-import beans.Lojas;
 import br.com.saara.R;
   
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

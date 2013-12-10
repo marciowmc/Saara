@@ -55,7 +55,9 @@
  	<string name="mapa_msg_erro_add_favoritos">Essa loja já foi adicionada aos favoritos.</string>
  	<string name="error_conexao_internet">Sem conexão. Por favor, verifique sua internet.</string>
  	<string name="load_lojas">Carregando lojas...</string>
+ 	<string name="load_categorias">Carregando categorias...</string>
  	<string name="error_load_lojas">Não foi possível carregar as lojas, por favor verifique sua conexão.</string>
+ 	<string name="error_load_categorias">Não foi possível carregar as categorias, por favor verifique sua conexão.</string>
  	<string name="favoritos_vazio">Você ainda não tem lojas favoritas.</string>
 	<string name="load_favoritos">Carregando favoritos...</string>
 	<string name="bt_navigator">IR À LOJA</string>
@@ -63,4 +65,6 @@
 	<string name="load_like">Curtindo a loja...</string>
 	<string name="popup_like">SE VOCÊ VISITOU A LOJA E CURTIU, CLIQUE EM </string>
 	<string name="dont_show_popup">Não exibir novamente</string>
+	<string name="retry">Tentar Novamente</string>
+    <string name="close">Sair</string>
 </resources>

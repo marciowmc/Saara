@@ -3,34 +3,30 @@ package br.com.saara;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import com.bugsense.trace.BugSenseHandler;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import beans.Categorias;
 import beans.Lojas;
+import br.com.saara.util.ClientHttp;
 import br.com.saara.util.RestClientGet;
+import br.com.saara.util.S;
 import br.com.saara.util.Utilidade;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -57,15 +53,12 @@ public class MapaActivity extends MapActivity {
 	
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	protected void onCreate(Bundle icicle) {
-		// TODO Auto-generated method stub
 		super.onCreate(icicle);
-		BugSenseHandler.initAndStartSession(MapaActivity.this, "c8c053dd");
 		setContentView(R.layout.mapa_loja);
 		
 		Bundle params = getIntent().getExtras();
@@ -84,18 +77,10 @@ public class MapaActivity extends MapActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				progress = new ProgressDialog(MapaActivity.this);
-				progress.setMessage(getString(R.string.load_like));
-				progress.setTitle(getString(R.string.app_name));
-				progress.setIcon(R.drawable.icon);
-				progress.show();
-				
 				String like = txtLike.getText().toString();
 				int likes = Integer.parseInt(like)+1;
 				txtLike.setText(""+likes);
-				
-				saveLike();
+				likeLoja();
 			}
 		});
 		
@@ -120,7 +105,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Uri callUri = Uri.parse("tel:" + loja.getTelefone());
 				Intent i = new Intent(Intent.ACTION_CALL, callUri);
 				startActivity(i);
@@ -131,7 +115,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				startActivity(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).setClass(MapaActivity.this, FavoritosActivity.class));
 				finish();
 			}
@@ -141,7 +124,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(MapaActivity.this,android.R.style.Theme_InputMethod);
 				dialog.setContentView(R.layout.popup_info);
 				Button close = (Button) dialog.findViewById(R.id.btClose);
@@ -154,7 +136,6 @@ public class MapaActivity extends MapActivity {
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						dialog.dismiss();
 					}
 				});
@@ -165,8 +146,6 @@ public class MapaActivity extends MapActivity {
 		
 		RelativeLayout curtidas = (RelativeLayout) findViewById(R.id.curtidas);
 		final ImageView imgFavarito  = (ImageView) findViewById(R.id.imgFavorito);
-		
-		//imgCategoria.setImageResource(categoria.getIcon());
 		
 		txtEnd.setText(loja.getEndereco());
 		txtCategoria.setText(categoria.getText());
@@ -182,7 +161,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 						Uri.parse("google.navigation:q=" + latitude + ","
 								+ longitude + "&mode=w"));
@@ -194,7 +172,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				onBackPressed();
 				finish();
 			}
@@ -204,7 +181,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				startActivity(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).setClass(MapaActivity.this, CategoriasActivity.class));
 				finish();
 			}
@@ -237,7 +213,6 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(isFavorite){
 					Toast.makeText(MapaActivity.this, getString(R.string.mapa_msg_remove_favoritos), Toast.LENGTH_LONG).show();
 					Utilidade.removeFavorite(MapaActivity.this, loja.getIdLoja());
@@ -266,14 +241,11 @@ public class MapaActivity extends MapActivity {
 		map.getOverlays().add(new SitesOverlay(drawable));
 		
 		IMEI = Utilidade.getIMEI(MapaActivity.this);
-		Calendar calendar = Calendar.getInstance();
 		try {
 			hash = Utilidade.SHA1(getPackageName());
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -300,7 +272,6 @@ public class MapaActivity extends MapActivity {
 	
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					dialog.dismiss();
 					Utilidade.saveShowPopup(MapaActivity.this, check.isChecked());
 								
@@ -332,7 +303,6 @@ public class MapaActivity extends MapActivity {
 
 		@Override
 		protected boolean onTap(int i) {
-
 			return (true);
 		}
 
@@ -344,18 +314,47 @@ public class MapaActivity extends MapActivity {
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
 		super.onBackPressed();
 		finish();
 	}
 	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		BugSenseHandler.closeSession(MapaActivity.this);
+	public void likeLoja() {
+		
+		ClientHttp.get(S.URL_LIKE_LOJA+loja.getIdLoja()+"&imei="+IMEI+"&hash="+hash, null , new AsyncHttpResponseHandler(){
+			
+			@Override
+			public void onStart() {
+				
+				progress = new ProgressDialog(MapaActivity.this);
+				progress.setMessage(getString(R.string.load_like));
+				progress.show();
+
+			}
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				
+				if (statusCode != 200) {
+					Toast.makeText(MapaActivity.this, getString(R.string.error_conexao_internet), Toast.LENGTH_LONG).show();
+				} else {
+					imgLike.setImageResource(R.drawable.curti_ativo);
+					imgLike.setEnabled(false);
+					Utilidade.saveLike(MapaActivity.this, loja.getIdLoja());
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable error, String content) {
+				Toast.makeText(MapaActivity.this, getString(R.string.error_conexao_internet), Toast.LENGTH_LONG).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				progress.dismiss();
+			}
+			
+		}, null);
 	}
-	
 	
 	public void saveLike(){
 		
@@ -373,7 +372,6 @@ public class MapaActivity extends MapActivity {
 						
 						@Override
 						public void run() {
-							// TODO Auto-generated method stub
 							Toast.makeText(MapaActivity.this, getString(R.string.error_conexao_internet), Toast.LENGTH_LONG).show();
 						}
 					});
@@ -383,7 +381,6 @@ public class MapaActivity extends MapActivity {
 						
 						@Override
 						public void run() {
-							// TODO Auto-generated method stub
 							imgLike.setImageResource(R.drawable.curti_ativo);
 							imgLike.setEnabled(false);
 							Utilidade.saveLike(MapaActivity.this, loja.getIdLoja());

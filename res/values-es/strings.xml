@@ -57,10 +57,14 @@
  	<string name="mapa_msg_remove_favoritos">Tienda retirado de favoritos.</string>
  	<string name="mapa_msg_erro_add_favoritos">Esta tienda ha sido añadido a favoritos.</string>
  	<string name="error_conexao_internet">No se puede conectar, por favor, comprueba tu conexión a Internet.</string>
- 	<string name="load_lojas">Cargando tiendas ...</string>
+ 	<string name="load_lojas">Cargando tiendas...</string>
+ 	<string name="load_categorias">Cargando las categorías...</string>
  	<string name="error_load_lojas">No se puede cargar las tiendas, por favor comprueba su conexión.</string>
+ 	<string name="error_load_categorias">No se puede cargar las categorías, por favor comprueba su conexión.</string>
  	<string name="favoritos_vazio">Usted no ha escogido una tienda como favorita.</string>
 	<string name="load_favoritos">Cargando favoritas...</string>
 	<string name="load_like">Cargando...</string>
 	<string name="dont_show_popup">No mostrar de nuevo</string>
+	<string name="retry">Reintentar</string>
+    <string name="close">Cerrar</string>
 </resources>

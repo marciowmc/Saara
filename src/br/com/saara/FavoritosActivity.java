@@ -6,16 +6,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.bugsense.trace.BugSenseHandler;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import beans.Categorias;
 import beans.Favoritos;
 import beans.Lojas;
+import br.com.saara.util.ClientHttp;
 import br.com.saara.util.ColorRGB;
 import br.com.saara.util.RestClientGet;
+import br.com.saara.util.S;
 import br.com.saara.util.Utilidade;
 import adapters.FavoritoAdapter;
-import adapters.LojaAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,18 +41,14 @@ public class FavoritosActivity extends Activity {
 	private Handler myHandler;
 	private ArrayList<Favoritos> listFavoritos;
 	private ListView listView;
-	private Categorias categoria;
 	private ProgressDialog progress;
 	private FavoritoAdapter adapter;
-	private static final String URL = "http://50.97.119.31/~i9app968/saara/getlojasbyid.php?id_lojas=";
 	private String getURL = "";
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		BugSenseHandler.initAndStartSession(FavoritosActivity.this, "c8c053dd");
 		setContentView(R.layout.favoritos);
 
 		myHandler = new Handler();
@@ -104,7 +101,6 @@ public class FavoritosActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(FavoritosActivity.this,android.R.style.Theme_InputMethod);
 				dialog.setContentView(R.layout.popup_info);
 			    WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
@@ -116,7 +112,6 @@ public class FavoritosActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						dialog.dismiss();
 					}
 				});
@@ -129,16 +124,81 @@ public class FavoritosActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				startActivity(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).setClass(FavoritosActivity.this, CategoriasActivity.class));
 				finish();
 			}
 		});
+	}
+	
+	public void carregarFavoritos() {
+		
+		ClientHttp.get(getURL, null, new AsyncHttpResponseHandler() {
 			
+			@Override
+			public void onStart() {
+				progress = new ProgressDialog(FavoritosActivity.this);
+				progress.setMessage(getString(R.string.load_favoritos));
+				progress.show();
+			}
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+
+				if (statusCode != 200) {
+					erroConexao();
+				} else {
+					
+					try {
+						JSONObject json = new JSONObject(content);
+						JSONArray jsonArray = json.getJSONArray("results");
+						for(int i= 0; i< jsonArray.length();i++){
+						
+							Favoritos fav = new Favoritos();
+							fav.setEnd_loja(jsonArray.getJSONObject(i).getString("end_loja"));
+							fav.setNome_loja(jsonArray.getJSONObject(i).getString("nome"));
+							fav.setLatitude_loja(Double.parseDouble(jsonArray.getJSONObject(i).getString("latitude")));
+							fav.setLongitude_loja(Double.parseDouble(jsonArray.getJSONObject(i).getString("longitude")));
+							fav.setId_loja(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
+							fav.setId_categoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria")));
+							fav.setNome_categoria(jsonArray.getJSONObject(i).getString("nome_categoria"));
+							fav.setTelefone(jsonArray.getJSONObject(i).getString("telefone"));
+							fav.setRgbColor(new ColorRGB().getColorList(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
+							fav.setDrawable_categoria(new ColorRGB().getDrawableCategoria(Integer.parseInt(jsonArray.getJSONObject(i).getString("id_categoria"))));
+							try{
+								fav.setLikes(Integer.parseInt(jsonArray.getJSONObject(i).getString("likes")));
+							}catch(Exception e){
+								fav.setLikes(0);
+							}
+							listFavoritos.add(fav);
+							
+						}
+						
+						adapter.setData(listFavoritos);
+						progress.dismiss();
+						
+					} catch (JSONException e) {
+						erroConexao();
+					}
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable error, String content) {
+				erroConexao();
+			}
+			
+			@Override
+			public void onFinish() {
+				progress.dismiss();
+			}
+			
+		}, null);
+		
 	}
 	
 	public void carregaFavoritos(){
 		new Thread(){
+			@Override
 			public void run(){
 				
 				RestClientGet get = new RestClientGet(getURL);
@@ -175,14 +235,12 @@ public class FavoritosActivity extends Activity {
 								
 								@Override
 								public void run() {
-									// TODO Auto-generated method stub
 									adapter.setData(listFavoritos);
 									progress.dismiss();
 								}
 							});
 							
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							erroConexao();
 						}
 					}else{
@@ -195,16 +253,9 @@ public class FavoritosActivity extends Activity {
 		}.start();
 	}
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		BugSenseHandler.closeSession(FavoritosActivity.this);
-	}
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 
 		listFavoritos.clear();
@@ -215,14 +266,13 @@ public class FavoritosActivity extends Activity {
 		String favoritos = Utilidade.getFavorite(FavoritosActivity.this);
 
 		if( favoritos == null || favoritos.trim().length() == 0){
+			
 			AlertDialog.Builder alert = new AlertDialog.Builder(FavoritosActivity.this);
 			alert.setMessage(getString(R.string.favoritos_vazio));
-			alert.setTitle(getString(R.string.app_name));
 			alert.setNeutralButton(getString(R.string.bt_dialogo_ok), new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
 					startActivity(new Intent().setClass(FavoritosActivity.this, CategoriasActivity.class));
 					finish();
 				}
@@ -245,38 +295,26 @@ public class FavoritosActivity extends Activity {
 									}
 								});
 				AlertDialog alert = builder.create();
-				alert.setTitle(getString(R.string.app_name));
 				alert.show();
 
 				
-			}else{
-			
-				progress = new ProgressDialog(FavoritosActivity.this);
-				progress.setMessage(getString(R.string.load_favoritos));
-				progress.setTitle(getString(R.string.app_name));
-				progress.show();
-				getURL = URL+favoritos;
-				
-				carregaFavoritos();
+			} else {
+				getURL = S.URL_LOJAS_BY_ID+favoritos;
+				carregarFavoritos();
 			}
 		}
 		
 	}
 	
 	public void erroConexao(){
-		myHandler.post(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
+		
 				final AlertDialog.Builder alert = new AlertDialog.Builder(FavoritosActivity.this);
-				alert.setTitle(getString(R.string.app_name));
 				alert.setMessage(getString(R.string.error_load_lojas));
 				alert.setNeutralButton(getString(R.string.bt_dialogo_ok), new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
+
 						dialog.cancel();
 						progress.dismiss();
 						finish();
@@ -286,7 +324,5 @@ public class FavoritosActivity extends Activity {
 				alert.create();
 				alert.show();
 			}
-		});
-	}
 }
 	

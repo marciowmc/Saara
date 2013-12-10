@@ -4,23 +4,31 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
 
 public class SaaraActivity extends Activity {
+	
+	private Runnable start = new Runnable() {
+		@Override
+		public void run() {
+			startActivity(new Intent().setClass(SaaraActivity.this,
+					CategoriasActivity.class));
+			SaaraActivity.this.finish();
+		}
+	};
+	
+	private Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				startActivity(new Intent().setClass(SaaraActivity.this, CategoriasActivity.class));
-				SaaraActivity.this.finish();
-			}
-		}, 3000);
+        handler = new Handler();
+        handler.postDelayed(start, 3000);
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	super.onBackPressed();
+    	handler.removeCallbacks(start);
     }
 }

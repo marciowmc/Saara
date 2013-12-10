@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 @SuppressWarnings("serial")
@@ -12,6 +13,7 @@ public class Categorias implements Serializable {
 	private int qtdLojas;
 	private int[] rgbColor;
 	private int[] rgbColorListaLojas;
+	private ArrayList<Lojas> lojas = new ArrayList<Lojas>();
 	
   
 	public int[] getRgbColorListaLojas() {
@@ -70,6 +72,20 @@ public class Categorias implements Serializable {
 		this.qtdLojas = qtd;
 		this.rgbColor = hexColor;
 		this.rgbColorListaLojas = rgbColorLojas;
+	}
+
+	/**
+	 * @return the lojas
+	 */
+	public ArrayList<Lojas> getLojas() {
+		return lojas;
+	}
+
+	/**
+	 * @param lojas the lojas to set
+	 */
+	public void setLojas(ArrayList<Lojas> lojas) {
+		this.lojas = lojas;
 	}
 	
 	
