@@ -113,6 +113,7 @@ public class CategoriasActivity extends Activity {
 		myHandler = new Handler();
 		App app = (App) getApplication();
 		if(app.allCategorias.size() > 1) {
+			arrayCategorias = app.allCategorias;
 			adapter.setData(app.allCategorias);
 		} else {
 			getAllCategories();
@@ -166,13 +167,10 @@ public class CategoriasActivity extends Activity {
 							try {
 
 								JSONObject json = new JSONObject(content);
-								if ("ok".equalsIgnoreCase(json
-										.optString("status"))) {
+								if ("ok".equalsIgnoreCase(json.optString("status"))) {
 
-									JSONArray jsonCategories = json
-											.optJSONArray("results");
-									arrayCategorias = Utilidade
-											.montaListaDeCategorias(CategoriasActivity.this);
+									JSONArray jsonCategories = json.optJSONArray("results");
+									arrayCategorias = Utilidade.montaListaDeCategorias(CategoriasActivity.this);
 									for (int i = 0; i < jsonCategories.length(); i++) {
 										for (Categorias categorias : arrayCategorias) {
 											if (categorias.getIdCategoria() == jsonCategories
@@ -194,7 +192,7 @@ public class CategoriasActivity extends Activity {
 									erroConexao();
 								}
 
-							} catch (JSONException e) {
+							} catch (Exception e) {
 								erroConexao();	
 							}
 						} else {

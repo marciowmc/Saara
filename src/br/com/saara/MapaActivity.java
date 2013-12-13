@@ -50,6 +50,8 @@ public class MapaActivity extends MapActivity {
 	private String hash;
 	private TextView txtLike;
 	protected ProgressDialog progress;
+	private int indexCategoria;
+	private int indexLoja;
 	
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -65,6 +67,8 @@ public class MapaActivity extends MapActivity {
 		
 		loja = (Lojas) params.getSerializable("loja");
 		categoria = (Categorias) params.getSerializable("categoria");
+		indexCategoria = (int) params.getInt("indexCategoria");
+		indexLoja = (int) params.getInt("indexLoja");
 		
 		latitude  = loja.getLatitude();
 		longitude = loja.getLongitude();
@@ -340,6 +344,9 @@ public class MapaActivity extends MapActivity {
 					imgLike.setImageResource(R.drawable.curti_ativo);
 					imgLike.setEnabled(false);
 					Utilidade.saveLike(MapaActivity.this, loja.getIdLoja());
+					loja.setLikes(loja.getLikes()+1);
+					App app = (App) getApplication();
+					app.allCategorias.get(indexCategoria).getLojas().get(indexLoja).setLikes(loja.getLikes());
 				}
 			}
 			

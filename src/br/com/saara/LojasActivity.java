@@ -115,12 +115,25 @@ public class LojasActivity extends Activity {
 			}
 		});
 		
-		myHandler = new Handler();
-		
-		listView = (ListView) findViewById(R.id.listLoja);
-		
 		listLojas = new ArrayList<Lojas>();
-	
+		listView = (ListView) findViewById(R.id.listLoja);		
+		adapter = new LojaAdapter(LojasActivity.this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
+	    listView.setAdapter(adapter);
+	    listView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+				   Intent intent = new Intent();
+				   intent.setClass(LojasActivity.this, MapaActivity.class);
+				   intent.putExtra("loja", listLojas.get(position));
+				   intent.putExtra("categoria", categoria);
+				   intent.putExtra("indexCategoria", indexCategoria);
+				   intent.putExtra("indexLoja", position);
+				   startActivity(intent);
+				}
+			});
+		
+		myHandler = new Handler();
 		app = (App) getApplication();
 		
 		carregaLojas();
@@ -132,8 +145,11 @@ public class LojasActivity extends Activity {
 		super.onResume();
 		
 		app = (App) getApplication();
+		if(!app.allCategorias.get(indexCategoria).getLojas().isEmpty()) {
+			listLojas = app.allCategorias.get(indexCategoria).getLojas();
+			adapter.setData(listLojas);
+		}
 	}
-	
 	
 	public void getLojasFromServer() {
 		
@@ -180,7 +196,7 @@ public class LojasActivity extends Activity {
 						
 						app = (App) getApplication();
 						
-						if (indexCategoria > 0) {
+						if (indexCategoria > -1) {
 							app.allCategorias.get(indexCategoria).setLojas(listLojas);
 						} else {
 							for (Categorias categoriaApp : app.allCategorias) {
@@ -314,19 +330,7 @@ public class LojasActivity extends Activity {
 				alert.show();
 	
 			}else{
-				adapter = new LojaAdapter(this,listLojas,R.layout.loja_itens, categoria.getIcon(), categoria.getRgbColor() , categoria.getRgbColorListaLojas());
-			    listView.setAdapter(adapter);
-			    listView.setOnItemClickListener(new OnItemClickListener() {
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view,
-								int position, long id) {
-						   Intent intent = new Intent();
-						   intent.setClass(LojasActivity.this, MapaActivity.class);
-						   intent.putExtra("loja", listLojas.get(position));
-						   intent.putExtra("categoria", categoria);
-						   startActivity(intent);
-						}
-					});
+				
 			    getLojasFromServer();
 			}
 		}
