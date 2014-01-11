@@ -357,7 +357,9 @@ public class MapaActivity extends MapActivity {
 			
 			@Override
 			public void onFinish() {
-				progress.dismiss();
+				if (progress != null && progress.isShowing()) {
+					progress.dismiss();
+				}
 			}
 			
 		}, null);

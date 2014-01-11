@@ -73,13 +73,12 @@ public class LojaAdapter extends BaseAdapter{
         ViewHolder holder;
    
         if (convertView == null) {
-            convertView = inflater.inflate(idLayout, null);
-    
+
+        	convertView = inflater.inflate(idLayout, null);
             holder = new ViewHolder();
             holder.icone = (ImageView)convertView.findViewById(R.id.imgIcon);
             holder.favorito   = (ImageView)convertView.findViewById(R.id.imgPin);
             holder.title = (TextView) convertView.findViewById(R.id.txtTitle);
-           
             convertView.setTag(holder);
             
         } else {
@@ -88,11 +87,12 @@ public class LojaAdapter extends BaseAdapter{
  
         if(Utilidade.checkLojaFavorita(context, estadoVO.getIdLoja())){
         	holder.favorito.setImageResource(R.drawable.favoritos_pressed);
+        } else {
+        	holder.favorito.setImageResource(R.drawable.favoritos_lojas);
         }
         
         holder.title.setText(estadoVO.getNome());
         holder.icone.setImageResource(imgCategoria);
-        
         
         if (position % 2 == 0){
         	holder.title.setBackgroundColor(Color.argb(215,rgbLight[0], rgbLight[1],rgbLight[2] ));
